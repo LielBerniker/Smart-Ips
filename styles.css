@@ -33,7 +33,7 @@ thead th {
 }
 
 .sub-header {
-  background-color: #2e3f58; /* Dark blue color */
+  background-color: #444; /* Dark grey color */
   color: white;
   padding: 5px;
   text-align: left;
@@ -149,17 +149,18 @@ button:hover {
   background-color: #455a7a;
 }
 
+.tab-headers {
+  background-color: #2e3f58; /* Dark blue background for the header row */
+}
+
 .tab-header {
-  width: auto;
   padding: 10px;
-  border-radius: 5px 5px 0 0; /* Add border radius */
-  border: 2px solid transparent; /* Transparent border initially */
+  border: 2px solid transparent;
   display: inline-block;
   cursor: pointer;
-  text-align: left;
-  font-size: 14px; /* Smaller font size */
-  margin-right: 10px; /* Add some space between headers */
-  background-color: #2e3f58; /* Dark blue background */
+  text-align: center;
+  font-size: 14px;
+  margin-right: 10px;
   color: white;
 }
 
