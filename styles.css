@@ -31,15 +31,7 @@ thead th {
   color: white;
   padding: 10px;
   text-align: left;
-}
-
-.tab-headers th {
-  background-color: #2e3f58; /* Dark blue color */
-  color: white;
-  padding: 10px;
-  text-align: center;
-  cursor: pointer;
-  width: 50%; /* Each tab header takes half the width */
+  width: 100%; /* Ensure headers take full width */
 }
 
 .sub-header {
@@ -159,32 +151,9 @@ button:hover {
   background-color: #455a7a;
 }
 
-.tab-header {
-  border: 2px solid transparent;
-  display: inline-block;
-  cursor: pointer;
-  text-align: center;
-  font-size: 14px;
-  color: white;
-  width: 50%; /* Each tab header takes half the width */
-}
-
-.tab-header.active-tab {
-  border-left: 2px solid white;
-  border-right: 2px solid white;
-  border-top: 2px solid white; /* White border on sides and top */
-  border-bottom: 2px solid #2e3f58; /* Match bottom border with background */
-  border-top-left-radius: 5px;
-  border-top-right-radius: 5px;
-}
-
 .right-table .sub-header {
   text-align: left;
   width: calc(100% / 3); /* Evenly distribute sub-headers */
-}
-
-.protections-header, .history-header, .protections-row, .history-row {
-  display: none; /* Initially hide all headers and rows */
 }
 
 .protections-row td:nth-child(1), .history-row td:nth-child(1) {

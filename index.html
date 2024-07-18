@@ -49,9 +49,8 @@
         </table>
         <table class="right-table">
             <thead>
-                <tr class="tab-headers">
-                    <th class="tab-header active-tab" onclick="showTab('protections')">Critical Impact Protections</th>
-                    <th class="tab-header" onclick="showTab('history')">Log History</th>
+                <tr>
+                    <th>Critical Impact Protections</th>
                 </tr>
                 <tr>
                     <th class="sub-header">Name</th>
@@ -60,12 +59,7 @@
                 </tr>
             </thead>
             <tbody>
-                <tr class="protections-row">
-                    <td>Name</td>
-                    <td>Date</td>
-                    <td>Status</td>
-                </tr>
-                <tr class="history-row">
+                <tr>
                     <td>Name</td>
                     <td>Date</td>
                     <td>Status</td>
@@ -75,25 +69,6 @@
     </div>
 
     <script>
-        function showTab(tab) {
-            const tabs = document.querySelectorAll('.tab-header');
-            tabs.forEach(t => t.classList.remove('active-tab'));
-            if (tab === 'protections') {
-                document.querySelector('.tab-header[onclick="showTab(\'protections\')"]').classList.add('active-tab');
-                document.querySelector('.right-table .protections-row').style.display = '';
-                document.querySelector('.right-table .history-row').style.display = 'none';
-            } else if (tab === 'history') {
-                document.querySelector('.tab-header[onclick="showTab(\'history\')"]').classList.add('active-tab');
-                document.querySelector('.right-table .protections-row').style.display = 'none';
-                document.querySelector('.right-table .history-row').style.display = '';
-            }
-        }
-
-        // Initialize the default tab
-        document.addEventListener('DOMContentLoaded', () => {
-            showTab('protections');
-        });
-
         document.getElementById('stateToggle').addEventListener('change', function() {
             const stateStatus = document.querySelector('.state-status');
             if (this.checked) {
