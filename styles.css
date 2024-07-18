@@ -26,16 +26,12 @@ table {
   flex-direction: column;
 }
 
-thead th {
+.main-header {
   background-color: #2e3f58; /* Dark blue color */
   color: white;
   padding: 10px;
-  text-align: left;
-}
-
-thead th[colspan="3"] {
-  text-align: center; /* Center align the "Critical Impact Protections" header */
-  font-size: 1.5em; /* Larger font size for the main header */
+  text-align: center;
+  width: 100%; /* Ensure the main header takes full width */
 }
 
 .sub-header {
@@ -148,4 +144,9 @@ button {
 
 button:hover {
   background-color: #455a7a;
+}
+
+.right-table .sub-header {
+  text-align: left;
+  width: calc(100% / 3); /* Evenly distribute sub-headers */
 }
