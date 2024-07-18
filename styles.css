@@ -26,21 +26,16 @@ table {
   flex-direction: column;
 }
 
-thead th {
+.main-header {
   background-color: #2e3f58; /* Dark blue color */
   color: white;
   padding: 10px;
-  text-align: center; /* Center align text */
-  width: 33%; /* Ensure headers take full width */
-}
-
-thead th[colspan="3"] {
-  text-align: center; /* Center align the "Critical Impact Protections" header */
-  width: 100%; /* Ensure full width for main header */
+  text-align: center;
+  width: 100%; /* Ensure the main header takes full width */
 }
 
 .sub-header {
-  background-color: #444; /* Dark grey color */
+  background-color: #2e3f58; /* Dark blue color */
   color: white;
   padding: 5px;
   text-align: center;
@@ -155,18 +150,4 @@ button {
 
 button:hover {
   background-color: #455a7a;
-}
-
-.right-table .sub-header {
-  text-align: center;
-  width: calc(100% / 3); /* Evenly distribute sub-headers */
-}
-
-.protections-row td:nth-child(1), .history-row td:nth-child(1) {
-  width: 33%; /* Name column width */
-}
-
-.protections-row td:nth-child(2), .history-row td:nth-child(2),
-.protections-row td:nth-child(3), .history-row td:nth-child(3) {
-width: 33%; /* Date and Status columns width */
 }
