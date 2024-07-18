@@ -26,6 +26,7 @@ thead th {
   color: white;
   padding: 10px;
   text-align: left;
+  cursor: pointer;
 }
 
 tbody td {
@@ -41,10 +42,14 @@ tbody tr:nth-child(even) {
 .config-container {
   display: flex;
   flex-direction: column;
-  align-items: center; /* Center align all elements in the column */
+  align-items: flex-start; /* Align items to the left */
 }
 
-.state-wrapper, .mode-wrapper, .threshold-wrapper, button {
+button {
+  align-self: center; /* Center align button in the config container */
+}
+
+.state-wrapper, .mode-wrapper, .threshold-wrapper {
   display: flex;
   align-items: center;
   margin-bottom: 10px;
@@ -122,9 +127,18 @@ button {
   border-radius: 4px;
   cursor: pointer;
   font-size: 16px;
-  align-self: center; /* Center align button in the config container */
+  margin-top: 20px;
 }
 
 button:hover {
   background-color: #455a7a;
+}
+
+.tab-header {
+  width: 50%;
+  text-align: center;
+}
+
+.protections-header, .history-header {
+  display: none; /* Initially hide all headers */
 }
