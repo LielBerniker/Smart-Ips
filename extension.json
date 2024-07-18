@@ -1,0 +1,32 @@
+{
+  "extension": {
+    "name": "Smart Ips Configuration",
+    "product-url": "https://github.com/LielBerniker/smart_ips",
+    "provider": "lielbe@checkpoint.com",
+    "version": "1.3",
+    "extension-version-requirements": {
+      "minimum-version": "1.3"
+    } 
+  },
+  "locations": [
+    {
+      "location": "details-pane",
+      "relevant-types": ["gateways"],
+      "ui-element": {
+        "type": "tab",
+        "caption": "Smart-Ips",
+        "tooltip": "Update Smart Ips configuration",
+        "action": {
+          "details-level": "full",
+          "method": "get",
+          "trigger-id": "gateways-details-pane",
+          "url": "index.html"
+        }
+      }
+    }
+  ],
+  "requested-permissions": {
+    "client": ["get-read-only-session", "run-read-only-commands"],
+    "pre-approved-commands": ["run-script"]
+  }
+}
