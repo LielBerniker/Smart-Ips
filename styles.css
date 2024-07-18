@@ -1,203 +1,196 @@
 body {
-  font-family: Arial, sans-serif;
+    font-family: Arial, sans-serif;
 }
 
 .table-container {
-  display: flex;
-  justify-content: space-between;
+    display: flex;
+    justify-content: space-between;
 }
 
 table {
-  border-collapse: collapse;
-  width: 100%;
-  margin: 10px;
-  border: 3px solid #000; /* Thicker border */
+    border-collapse: collapse;
+    width: 100%;
+    margin: 10px;
+    border: 3px solid #000; /* Thicker border */
 }
 
 .left-table {
-  flex: 1;
+    flex: 1;
 }
 
 .right-table {
-  height: 100%; /* Ensure table takes full height */
-  display: flex;
-  flex-direction: column;
+    flex: 3;
+    height: auto;
+    display: flex;
+    flex-direction: column;
 }
 
 thead th {
-  background-color: #2e3f58; /* Dark blue color */
-  color: white;
-  padding: 10px;
-  text-align: left;
+    background-color: #2e3f58; /* Dark blue color */
+    color: white;
+    padding: 10px;
+    text-align: left;
 }
 
 .sub-header {
-  background-color: #f0f0f0; /* Light grey color */
-  color: #666; /* Light grey text color */
-  padding: 10px;
-  text-align: left;
+    background-color: #444; /* Dark grey color */
+    color: white;
+    padding: 5px;
+    text-align: left;
 }
 
 tbody {
-  flex: 1;
-  overflow-y: auto;
+    flex: 1;
+    overflow-y: auto;
 }
 
 tbody td {
-  padding: 10px;
-  border: 1px solid #ddd;
-  text-align: left; /* Align text to the left in table cells */
+    padding: 10px;
+    border: 1px solid #ddd;
+    text-align: left; /* Align text to the left in table cells */
 }
 
 tbody tr:nth-child(even) {
-  background-color: #f2f2f2;
+    background-color: #f2f2f2;
 }
 
 .config-container {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start; /* Align items to the left */
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start; /* Align items to the left */
 }
 
 button {
-  align-self: center; /* Center align button in the config container */
+    align-self: center; /* Center align button in the config container */
 }
 
 .state-wrapper, .mode-wrapper, .threshold-wrapper {
-  display: flex;
-  align-items: center;
-  margin-bottom: 10px;
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
 }
 
 .state-text, .mode-text, .threshold-wrapper label {
-  font-weight: bold;
-  margin-right: 10px;
+    font-weight: bold;
+    margin-right: 10px;
 }
 
 .state-status {
-  margin-left: 10px;
+    margin-left: 10px;
 }
 
 .switch {
-  position: relative;
-  display: inline-block;
-  width: 48px;
-  height: 24px;
+    position: relative;
+    display: inline-block;
+    width: 48px;
+    height: 24px;
 }
 
 .switch input { 
-  opacity: 0;
-  width: 0;
-  height: 0;
+    opacity: 0;
+    width: 0;
+    height: 0;
 }
 
 .slider {
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background-color: #ccc;
-  transition: .4s;
-  border-radius: 24px;
-  cursor: pointer;
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #ccc;
+    transition: .4s;
+    border-radius: 24px;
+    cursor: pointer;
 }
 
 .slider:before {
-  position: absolute;
-  content: "";
-  height: 18px;
-  width: 18px;
-  left: 3px;
-  bottom: 3px;
-  background-color: white;
-  transition: .4s;
-  border-radius: 50%;
+    position: absolute;
+    content: "";
+    height: 18px;
+    width: 18px;
+    left: 3px;
+    bottom: 3px;
+    background-color: white;
+    transition: .4s;
+    border-radius: 50%;
 }
 
 input:checked + .slider {
-  background-color: #2196F3;
+    background-color: #2196F3;
 }
 
 input:checked + .slider:before {
-  transform: translateX(24px);
+    transform: translateX(24px);
 }
 
 .mode-wrapper .radio-options {
-  display: flex;
-  flex-direction: column; /* Arrange radio buttons in a column */
-  margin-left: 10px;
+    display: flex;
+    flex-direction: column; /* Arrange radio buttons in a column */
+    margin-left: 10px;
 }
 
 .threshold-wrapper input {
-  margin-left: 10px;
+    margin-left: 10px;
 }
 
 button {
-  padding: 10px 20px;
-  background-color: #2e3f58;
-  color: white;
-  border: none;
-  border-radius: 4px;
-  cursor: pointer;
-  font-size: 16px;
-  margin-top: 20px;
+    padding: 10px 20px;
+    background-color: #2e3f58;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 16px;
+    margin-top: 20px;
 }
 
 button:hover {
-  background-color: #455a7a;
+    background-color: #455a7a;
 }
 
 .tab-header {
-  padding: 10px;
-  background-color: #2e3f58; /* Dark blue color */
-  color: white;
-  cursor: pointer;
-  text-align: left;
-  font-size: 14px; /* Smaller font size */
-  margin-right: 10px; /* Add some space between headers */
-  border-radius: 5px; /* Rounded border */
-  border: none; /* Remove default border */
+    width: auto;
+    padding: 10px;
+    border-radius: 5px; /* Add border radius */
+    border: 2px solid transparent; /* Transparent border initially */
+    display: inline-block;
+    cursor: pointer;
+    text-align: left;
+    font-size: 14px; /* Smaller font size */
+    margin-right: 10px; /* Add some space between headers */
 }
 
 .tab-header.active-tab {
-  border: 2px solid white; /* White border when active */
+    background-color: #2e3f58; /* Dark blue color */
+    color: white;
+    border-color: #2e3f58; /* Dark blue border color when active */
 }
 
 .tab-header:not(.active-tab) {
-  background-color: #ccc; /* Grey color */
-  color: black;
-  border-color: #ccc; /* Grey border color when inactive */
-}
-
-.right-table thead {
-  display: flex;
-  justify-content: space-between;
-  width: 100%;
+    background-color: #ccc; /* Grey color */
+    color: black;
+    border-color: #ccc; /* Grey border color when inactive */
 }
 
 .right-table .sub-header {
-  width: 50%; /* Name column width */
-  text-align: left;
+    width: 50%; /* Name column width */
+    text-align: left;
 }
 
 .right-table .sub-header + .sub-header {
-  width: 25%; /* Date and Status columns width */
+    width: 25%; /* Date and Status columns width */
 }
 
 .protections-header, .history-header, .protections-row, .history-row {
-  display: none; /* Initially hide all headers and rows */
+    display: none; /* Initially hide all headers and rows */
 }
 
 .protections-row td:nth-child(1), .history-row td:nth-child(1) {
-  width: 50%; /* Name column width */
-}
-
-.right-table .sub-header:not(:first-child) {
-  border-left: 1px solid #ccc; /* Light border between headers */
+    width: 50%; /* Name column width */
 }
 
 .protections-row td:nth-child(2), .history-row td:nth-child(2),
 .protections-row td:nth-child(3), .history-row td:nth-child(3) {
-  width: 25%; /* Date and Status columns width */
+  width: 17%; /* Date and Status columns width */
 }
