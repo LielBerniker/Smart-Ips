@@ -10,7 +10,7 @@ body {
 
 table {
   border-collapse: collapse;
-  width: 100%; /* Ensure tables take up full width */
+  width: 48%; /* Ensure tables take up full width */
   margin: 10px;
   border: 3px solid #000; /* Thicker border */
 }
@@ -30,36 +30,29 @@ thead th {
   background-color: #2e3f58; /* Dark blue color */
   color: white;
   padding: 10px;
-  text-align: center; /* Center align text */
-  width: 33%; /* Ensure headers take full width */
+  text-align: left;
 }
 
 thead th[colspan="3"] {
   text-align: center; /* Center align the "Critical Impact Protections" header */
-  width: 100%; /* Ensure full width for main header */
+  font-size: 1.5em; /* Larger font size for the main header */
 }
 
 .sub-header {
-  background-color: #444; /* Dark grey color */
+  background-color: #2e3f58; /* Dark blue color */
   color: white;
-  padding: 5px;
-  text-align: center;
-  width: 33%; /* Evenly distribute sub-headers */
-}
-
-tbody {
-  flex: 1;
-  overflow-y: auto;
+  padding: 10px;
+  text-align: left;
 }
 
 tbody td {
   padding: 10px;
-  border: 1px solid #ddd;
+  border: 1px solid #ddd; /* Border for table cells */
   text-align: left; /* Align text to the left in table cells */
 }
 
 tbody tr:nth-child(even) {
-  background-color: #f2f2f2;
+  background-color: #f2f2f2; /* Alternate row background color */
 }
 
 .config-container {
@@ -155,18 +148,4 @@ button {
 
 button:hover {
   background-color: #455a7a;
-}
-
-.right-table .sub-header {
-  text-align: center;
-  width: calc(100% / 3); /* Evenly distribute sub-headers */
-}
-
-.protections-row td:nth-child(1), .history-row td:nth-child(1) {
-  width: 33%; /* Name column width */
-}
-
-.protections-row td:nth-child(2), .history-row td:nth-child(2),
-.protections-row td:nth-child(3), .history-row td:nth-child(3) {
-width: 33%; /* Date and Status columns width */
 }
