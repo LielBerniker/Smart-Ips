@@ -150,12 +150,15 @@ button:hover {
 }
 
 .tab-header {
-  width: 50%;
-  text-align: center;
-  cursor: pointer;
+  width: auto;
   padding: 10px;
   border-radius: 5px; /* Add border radius */
   border: 2px solid transparent; /* Transparent border initially */
+  display: inline-block;
+  cursor: pointer;
+  text-align: left;
+  font-size: 14px; /* Smaller font size */
+  margin-right: 10px; /* Add some space between headers */
 }
 
 .tab-header.active-tab {
@@ -170,17 +173,13 @@ button:hover {
   border-color: #ccc; /* Grey border color when inactive */
 }
 
-.tab-header + .tab-header {
-  margin-left: 10px;
-}
-
 .right-table .sub-header {
-  width: 66%; /* Name column width */
+  width: 50%; /* Name column width */
   text-align: left;
 }
 
 .right-table .sub-header + .sub-header {
-  width: 17%; /* Date and Status columns width */
+  width: 25%; /* Date and Status columns width */
 }
 
 .protections-header, .history-header, .protections-row, .history-row {
@@ -188,10 +187,10 @@ button:hover {
 }
 
 .protections-row td:nth-child(1), .history-row td:nth-child(1) {
-  width: 66%; /* Name column width */
+  width: 50%; /* Name column width */
 }
 
 .protections-row td:nth-child(2), .history-row td:nth-child(2),
 .protections-row td:nth-child(3), .history-row td:nth-child(3) {
-  width: 17%; /* Date and Status columns width */
+  width: 25%; /* Date and Status columns width */
 }
