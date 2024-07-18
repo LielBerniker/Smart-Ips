@@ -1,0 +1,38 @@
+body {
+  font-family: Arial, sans-serif;
+}
+
+.table-container {
+  display: flex;
+  justify-content: space-between;
+}
+
+table {
+  border-collapse: collapse;
+  width: 100%;
+  margin: 10px;
+}
+
+.left-table {
+  flex: 3;
+}
+
+.right-table {
+  flex: 1;
+}
+
+thead th {
+  background-color: #2e3f58; /* Dark blue color */
+  color: white;
+  padding: 10px;
+  text-align: left;
+}
+
+tbody td {
+  padding: 10px;
+  border: 1px solid #ddd;
+}
+
+tbody tr:nth-child(even) {
+  background-color: #f2f2f2;
+}
