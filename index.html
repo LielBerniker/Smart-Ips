@@ -1,76 +1,79 @@
 ﻿<!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml">
-  <head>
-    <title>Show Simple Gateway Interfaces</title>
-    <link rel="stylesheet" href="styles.css" />
-  </head>
-
-  <body onload="showContext()">
-    <script src="updateSmartDpiConf.js"></script>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Two Tables Side by Side</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
     <div class="table-container">
-      <table class="left-table">
-          <thead>
-              <tr>
-                  <th>Policy</th>
-              </tr>
-          </thead>
-          <tbody>
-              <tr>
-                  <td>
-                      <div class="state-wrapper">
-                          <span class="state-text">State:</span>
-                          <span class="state-status">Disabled</span>
-                          <label class="switch">
-                              <input type="checkbox" id="stateToggle">
-                              <span class="slider"></span>
-                          </label>
-                      </div>
-                  </td>
-              </tr>
-              <tr>
-                  <td>
-                      <div class="mode-wrapper">
-                          <span class="mode-text">Mode:</span>
-                          <label>
-                              <input type="radio" name="mode" value="action"> Action
-                          </label>
-                          <label>
-                              <input type="radio" name="mode" value="monitor"> Monitor
-                          </label>
-                      </div>
-                  </td>
-              </tr>
-              <tr>
-                  <td>
-                      <div class="threshold-wrapper">
-                          <label for="threshold">Threshold (%):</label>
-                          <input type="number" id="threshold" name="threshold" min="1" max="100">
-                      </div>
-                  </td>
-              </tr>
-              <tr>
-                  <td>
-                      <button type="submit">Submit</button>
-                  </td>
-              </tr>
-          </tbody>
-      </table>
-      <table class="right-table">
-          <thead>
-              <tr>
-                  <th>Critical Impact Protections</th>
-              </tr>
-          </thead>
-          <tbody>
-              <tr>
-                  <td>Content 1</td>
-              </tr>
-              <tr>
-                  <td>Content 2</td>
-              </tr>
-              <!-- Add more rows as needed -->
-          </tbody>
-      </table>
-  </div>
-  </body>
+        <table class="left-table">
+            <thead>
+                <tr>
+                    <th>Policy</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>
+                        <div class="config-container">
+                            <div class="state-wrapper">
+                                <span class="state-text">State:</span>
+                                <label class="switch">
+                                    <input type="checkbox" id="stateToggle">
+                                    <span class="slider"></span>
+                                </label>
+                                <span class="state-status">Disabled</span>
+                            </div>
+                            <div class="mode-wrapper">
+                                <span class="mode-text">Mode:</span>
+                                <div class="radio-options">
+                                    <label>
+                                        <input type="radio" name="mode" value="action"> Action
+                                    </label>
+                                    <label>
+                                        <input type="radio" name="mode" value="monitor"> Monitor
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="threshold-wrapper">
+                                <label for="threshold">Threshold (%):</label>
+                                <input type="number" id="threshold" name="threshold" min="1" max="100">
+                            </div>
+                            <button type="submit">Submit</button>
+                        </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <table class="right-table">
+            <thead>
+                <tr>
+                    <th>Critical Impact Protections</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Content 1</td>
+                </tr>
+                <tr>
+                    <td>Content 2</td>
+                </tr>
+                <!-- Add more rows as needed -->
+            </tbody>
+        </table>
+    </div>
+
+    <script>
+        document.getElementById('stateToggle').addEventListener('change', function() {
+            const stateStatus = document.querySelector('.state-status');
+            if (this.checked) {
+                stateStatus.textContent = 'Enabled';
+            } else {
+                stateStatus.textContent = 'Disabled';
+            }
+        });
+    </script>
+</body>
 </html>
