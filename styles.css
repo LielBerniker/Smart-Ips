@@ -33,7 +33,7 @@ thead th {
 }
 
 .sub-header {
-  background-color: #444; /* Dark grey color */
+  background-color: #2e3f58; /* Dark blue color */
   color: white;
   padding: 5px;
   text-align: left;
@@ -164,8 +164,12 @@ button:hover {
 }
 
 .tab-header.active-tab {
-  border-color: white; /* White border when active */
-  border-bottom-color: #2e3f58; /* Keep bottom border same as background to blend in */
+  border-left: 2px solid white;
+  border-right: 2px solid white;
+  border-top: 2px solid white; /* White border on sides and top */
+  border-bottom: 2px solid #2e3f58; /* Match bottom border with background */
+  border-top-left-radius: 5px;
+  border-top-right-radius: 5px;
 }
 
 .right-table .sub-header {
