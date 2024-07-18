@@ -78,14 +78,22 @@
         function showTab(tab) {
             const tabs = document.querySelectorAll('.tab-header');
             tabs.forEach(t => t.classList.remove('active-tab'));
+            const protectionsHeader = document.querySelectorAll('.protections-header');
+            const historyHeader = document.querySelectorAll('.history-header');
+            const protectionsRow = document.querySelectorAll('.protections-row');
+            const historyRow = document.querySelectorAll('.history-row');
             if (tab === 'protections') {
                 document.querySelector('.tab-header[onclick="showTab(\'protections\')"]').classList.add('active-tab');
-                document.querySelector('.right-table .protections-row').style.display = '';
-                document.querySelector('.right-table .history-row').style.display = 'none';
+                protectionsHeader.forEach(el => el.style.display = '');
+                protectionsRow.forEach(el => el.style.display = '');
+                historyHeader.forEach(el => el.style.display = 'none');
+                historyRow.forEach(el => el.style.display = 'none');
             } else if (tab === 'history') {
                 document.querySelector('.tab-header[onclick="showTab(\'history\')"]').classList.add('active-tab');
-                document.querySelector('.right-table .protections-row').style.display = 'none';
-                document.querySelector('.right-table .history-row').style.display = '';
+                protectionsHeader.forEach(el => el.style.display = 'none');
+                protectionsRow.forEach(el => el.style.display = 'none');
+                historyHeader.forEach(el => el.style.display = '');
+                historyRow.forEach(el => el.style.display = '');
             }
         }
 
