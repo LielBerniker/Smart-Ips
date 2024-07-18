@@ -14,11 +14,11 @@ table {
 }
 
 .left-table {
-  flex: 3;
+  flex: 1;
 }
 
 .right-table {
-  flex: 1;
+  flex: 3;
 }
 
 thead th {
