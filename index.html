@@ -16,12 +16,43 @@
           </thead>
           <tbody>
               <tr>
-                  <td>Content 1</td>
+                  <td>
+                      <div class="state-wrapper">
+                          <span class="state-text">State:</span>
+                          <span class="state-status">Disabled</span>
+                          <label class="switch">
+                              <input type="checkbox" id="stateToggle">
+                              <span class="slider"></span>
+                          </label>
+                      </div>
+                  </td>
               </tr>
               <tr>
-                  <td>Content 2</td>
+                  <td>
+                      <div class="mode-wrapper">
+                          <span class="mode-text">Mode:</span>
+                          <label>
+                              <input type="radio" name="mode" value="action"> Action
+                          </label>
+                          <label>
+                              <input type="radio" name="mode" value="monitor"> Monitor
+                          </label>
+                      </div>
+                  </td>
               </tr>
-              <!-- Add more rows as needed -->
+              <tr>
+                  <td>
+                      <div class="threshold-wrapper">
+                          <label for="threshold">Threshold (%):</label>
+                          <input type="number" id="threshold" name="threshold" min="1" max="100">
+                      </div>
+                  </td>
+              </tr>
+              <tr>
+                  <td>
+                      <button type="submit">Submit</button>
+                  </td>
+              </tr>
           </tbody>
       </table>
       <table class="right-table">
