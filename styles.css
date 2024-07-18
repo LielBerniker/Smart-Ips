@@ -10,6 +10,7 @@ body {
 
 table {
   border-collapse: collapse;
+  width: 100%; /* Ensure tables take up full width */
   margin: 10px;
   border: 3px solid #000; /* Thicker border */
 }
@@ -30,14 +31,13 @@ thead th {
   color: white;
   padding: 10px;
   text-align: left;
-  width: 100%; /* Ensure headers take full width */
 }
 
 .tab-headers th {
   background-color: #2e3f58; /* Dark blue color */
   color: white;
   padding: 10px;
-  text-align: left;
+  text-align: center;
   cursor: pointer;
   width: 50%; /* Each tab header takes half the width */
 }
@@ -183,19 +183,15 @@ button:hover {
   width: calc(100% / 3); /* Evenly distribute sub-headers */
 }
 
-.right-table .sub-header + .sub-header {
-  width: calc(100% / 3); /* Evenly distribute sub-headers */
-}
-
 .protections-header, .history-header, .protections-row, .history-row {
   display: none; /* Initially hide all headers and rows */
 }
 
 .protections-row td:nth-child(1), .history-row td:nth-child(1) {
-  width: 50%; /* Name column width */
+  width: 33%; /* Name column width */
 }
 
 .protections-row td:nth-child(2), .history-row td:nth-child(2),
 .protections-row td:nth-child(3), .history-row td:nth-child(3) {
-width: 25%; /* Date and Status columns width */
+width: 33%; /* Date and Status columns width */
 }
