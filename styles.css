@@ -19,8 +19,7 @@ table {
 }
 
 .right-table {
-  flex: 3;
-  height: auto;
+  height: 100%; /* Ensure table takes full height */
   display: flex;
   flex-direction: column;
 }
@@ -33,9 +32,9 @@ thead th {
 }
 
 .sub-header {
-  background-color: #444; /* Dark grey color */
-  color: white;
-  padding: 5px;
+  background-color: #f0f0f0; /* Light grey color */
+  color: #666; /* Light grey text color */
+  padding: 10px;
   text-align: left;
 }
 
@@ -150,27 +149,31 @@ button:hover {
 }
 
 .tab-header {
-  width: auto;
   padding: 10px;
-  border-radius: 5px; /* Add border radius */
-  border: 2px solid transparent; /* Transparent border initially */
-  display: inline-block;
+  background-color: #2e3f58; /* Dark blue color */
+  color: white;
   cursor: pointer;
   text-align: left;
   font-size: 14px; /* Smaller font size */
   margin-right: 10px; /* Add some space between headers */
+  border-radius: 5px; /* Rounded border */
+  border: none; /* Remove default border */
 }
 
 .tab-header.active-tab {
-  background-color: #2e3f58; /* Dark blue color */
-  color: white;
-  border-color: #2e3f58; /* Dark blue border color when active */
+  border: 2px solid white; /* White border when active */
 }
 
 .tab-header:not(.active-tab) {
   background-color: #ccc; /* Grey color */
   color: black;
   border-color: #ccc; /* Grey border color when inactive */
+}
+
+.right-table thead {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
 }
 
 .right-table .sub-header {
@@ -188,6 +191,10 @@ button:hover {
 
 .protections-row td:nth-child(1), .history-row td:nth-child(1) {
   width: 50%; /* Name column width */
+}
+
+.right-table .sub-header:not(:first-child) {
+  border-left: 1px solid #ccc; /* Light border between headers */
 }
 
 .protections-row td:nth-child(2), .history-row td:nth-child(2),
