@@ -150,3 +150,8 @@ button {
 button:hover {
   background-color: #455a7a;
 }
+
+thead th.name, thead th.date, thead th.status {
+  width: 150px; /* Adjust this value as needed */
+}
+
