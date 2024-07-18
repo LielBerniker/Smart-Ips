@@ -50,40 +50,25 @@
         <table class="right-table">
             <thead>
                 <tr>
-                    <th class="tab-header" onclick="showTab('protections')">Critical Impact Protections</th>
+                    <th class="tab-header active-tab" onclick="showTab('protections')">Critical Impact Protections</th>
                     <th class="tab-header" onclick="showTab('history')">Log History</th>
                 </tr>
-                <tr class="protections-header">
-                    <th>Name</th>
-                    <th>Date</th>
-                    <th>Status</th>
-                </tr>
-                <tr class="history-header">
-                    <th>Name</th>
-                    <th>Date</th>
-                    <th>Status</th>
+                <tr>
+                    <th colspan="3" class="sub-header">Name</th>
+                    <th colspan="3" class="sub-header">Date</th>
+                    <th colspan="3" class="sub-header">Status</th>
                 </tr>
             </thead>
             <tbody>
                 <tr class="protections-row">
-                    <td>Protection 1</td>
-                    <td>2024-07-17</td>
-                    <td>Active</td>
-                </tr>
-                <tr class="protections-row">
-                    <td>Protection 2</td>
-                    <td>2024-07-16</td>
-                    <td>Inactive</td>
+                    <td>Name</td>
+                    <td>Date</td>
+                    <td>Status</td>
                 </tr>
                 <tr class="history-row">
-                    <td>Log 1</td>
-                    <td>2024-07-17</td>
-                    <td>Completed</td>
-                </tr>
-                <tr class="history-row">
-                    <td>Log 2</td>
-                    <td>2024-07-16</td>
-                    <td>Pending</td>
+                    <td>Name</td>
+                    <td>Date</td>
+                    <td>Status</td>
                 </tr>
             </tbody>
         </table>
@@ -91,16 +76,20 @@
 
     <script>
         function showTab(tab) {
+            const tabs = document.querySelectorAll('.tab-header');
+            tabs.forEach(t => t.classList.remove('active-tab'));
             const protectionsHeader = document.querySelectorAll('.protections-header');
             const historyHeader = document.querySelectorAll('.history-header');
             const protectionsRow = document.querySelectorAll('.protections-row');
             const historyRow = document.querySelectorAll('.history-row');
             if (tab === 'protections') {
+                document.querySelector('.tab-header[onclick="showTab(\'protections\')"]').classList.add('active-tab');
                 protectionsHeader.forEach(el => el.style.display = '');
                 protectionsRow.forEach(el => el.style.display = '');
                 historyHeader.forEach(el => el.style.display = 'none');
                 historyRow.forEach(el => el.style.display = 'none');
             } else if (tab === 'history') {
+                document.querySelector('.tab-header[onclick="showTab(\'history\')"]').classList.add('active-tab');
                 protectionsHeader.forEach(el => el.style.display = 'none');
                 protectionsRow.forEach(el => el.style.display = 'none');
                 historyHeader.forEach(el => el.style.display = '');
