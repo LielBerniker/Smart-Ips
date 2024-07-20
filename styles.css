@@ -4,27 +4,74 @@ body {
 
 .table-container {
   display: flex;
-  justify-content: space-between; /* Ensure the container takes up full width */
-  width: 100%;
-}
-
-table {
-  border-collapse: collapse;
-  margin: 10px;
-  border: 3px solid #000; /* Thicker border */
-  table-layout: fixed;
+  width: 100%; /* Ensure the container takes up full width */
 }
 
 .left-table {
-  flex: 1;
-  width: 45%; /* Ensure the left table takes up 45% of the width */
+  width: 25%; /* Ensure the left table takes up 25% of the width */
+  border: 3px solid #000; /* Thicker border */
+  border-collapse: collapse;
+  margin: 10px;
 }
 
-thead th {
+.policy-header {
   background-color: #2e3f58; /* Dark blue color */
   color: white;
   padding: 10px;
   text-align: left;
+}
+
+.protection-table-container {
+  width: 75%; /* Ensure the right container takes up 75% of the width */
+  border: 3px solid #2e3f58; /* Dark blue border around all elements */
+  padding: 0;
+  margin: 10px;
+  height: 300px; /* Fixed height */
+  box-sizing: border-box; /* Include padding and border in height calculation */
+  border-radius: 5px; /* Less rounded corners */
+}
+
+.header-container {
+  display: flex;
+}
+
+.header-container h1 {
+  flex: 1;
+  text-align: center;
+  margin: 0; /* Remove margins */
+  background-color: #2e3f58; /* Dark blue background */
+  color: white; /* White text color */
+  padding: 15px; /* Padding for better appearance */
+  box-sizing: border-box; /* Include padding in width calculation */
+  font-size: 16px; /* Smaller text size */
+  cursor: pointer; /* Cursor changes to pointer */
+}
+
+.header-container h1.active {
+  border: 2px solid black; /* Black border when active */
+  background-color: #3a4a6b; /* Slightly lighter background color when active */
+}
+
+.protection-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 0;
+  border-bottom: 3px solid #d3d3d3; /* Light grey border at the bottom */
+}
+
+.protection-table-th, .protection-table-td {
+  border: none;
+  padding: 10px;
+  text-align: left;
+}
+
+.protection-table-th {
+  background-color: #d3d3d3; /* Light grey background */
+  color: black;
+}
+
+.protection-table-tbody tr:nth-child(even) {
+  background-color: #f2f2f2;
 }
 
 .config-container {
@@ -120,58 +167,4 @@ button {
 
 button:hover {
   background-color: #455a7a;
-}
-
-/* Styles for the protection table container */
-.protection-table-container {
-  border: 3px solid #2e3f58; /* Dark blue border around all elements */
-  padding: 0;
-  margin: 10px;
-  height: 400px; /* Fixed height */
-  box-sizing: border-box; /* Include padding and border in height calculation */
-  border-radius: 5px; /* Less rounded corners */
-  flex: 1;
-  width: 50%; /* Ensure the right container takes up 50% of the width */
-}
-
-.header-container {
-  display: flex;
-}
-
-.header-container h1 {
-  flex: 1;
-  text-align: center;
-  margin: 0; /* Remove margins */
-  background-color: #2e3f58; /* Dark blue background */
-  color: white; /* White text color */
-  padding: 15px; /* Padding for better appearance */
-  box-sizing: border-box; /* Include padding in width calculation */
-  font-size: 16px; /* Smaller text size */
-  cursor: pointer; /* Cursor changes to pointer */
-}
-
-.header-container h1.active {
-  border: 2px solid black; /* Black border when active */
-  background-color: #3a4a6b; /* Slightly lighter background color when active */
-}
-
-.protection-table {
-  width: 100%;
-  border-collapse: collapse;
-  margin: 0;
-}
-
-.protection-table-th, .protection-table-td {
-  border: 1px solid #ddd;
-  padding: 10px;
-  text-align: left;
-}
-
-.protection-table-th {
-  background-color: #d3d3d3; /* Light grey background */
-  color: black;
-}
-
-.protection-table-tbody tr:nth-child(even) {
-  background-color: #f2f2f2;
 }
