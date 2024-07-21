@@ -3,10 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Two Tables Side by Side</title>
     <link rel="stylesheet" href="styles.css">
 </head>
-<body>
+<body onload="showContext()">
+  <script src="updateSmartDpiConf.js"></script>
   <div class="table-container">
       <table class="left-table">
           <thead>
@@ -72,38 +72,5 @@
           </table>
       </div>
   </div>
-
-  <script>
-      document.getElementById('stateToggle').addEventListener('change', function() {
-          const stateStatus = document.querySelector('.state-status');
-          const modeOptions = document.querySelectorAll('input[name="mode"]');
-          const monitorOption = document.querySelector('input[name="mode"][value="monitor"]');
-          
-          if (this.checked) {
-              stateStatus.textContent = 'Enabled';
-              modeOptions.forEach(option => option.disabled = false);
-              monitorOption.checked = true;
-          } else {
-              stateStatus.textContent = 'Disabled';
-              modeOptions.forEach(option => option.disabled = true);
-              monitorOption.checked = true;
-          }
-      });
-
-      document.querySelectorAll('.header-container h1').forEach(item => {
-          item.addEventListener('click', event => {
-              // Remove the active class from all h1 elements
-              document.querySelectorAll('.header-container h1').forEach(h1 => {
-                  h1.classList.remove('active');
-              });
-              
-              // Add the active class to the clicked h1 element
-              item.classList.add('active');
-          });
-      });
-
-      // Set the default active header
-      document.getElementById('critical-impact-protections').classList.add('active');
-  </script>
 </body>
 </html>
