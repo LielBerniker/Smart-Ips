@@ -121,8 +121,8 @@ function getConfigurationData(item) {
       }
       window.currentGatewayInfo.threshold = Number(parsedResponse.threshold);
       
-      updateProtections(parsedResponse.protections)
-      updateHistory(parsedResponse.history)
+      updateProtections(parsedResponse.protections.reverse())
+      updateHistory(parsedResponse.history.reverse())
       console.log('successfully got gateway configuration information'); 
       return true;
     } else {
