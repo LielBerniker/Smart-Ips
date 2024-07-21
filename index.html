@@ -30,10 +30,10 @@
                               <span class="mode-text">Mode:</span>
                               <div class="radio-options">
                                   <label>
-                                      <input type="radio" name="mode" value="action"> Action
+                                      <input type="radio" name="mode" value="monitor" disabled> Monitor
                                   </label>
                                   <label>
-                                      <input type="radio" name="mode" value="monitor"> Monitor
+                                      <input type="radio" name="mode" value="action" disabled> Action
                                   </label>
                               </div>
                           </div>
@@ -49,8 +49,8 @@
       </table>
       <div class="protection-table-container">
           <div class="header-container">
-            <h1 id="critical-impact-protections">Critical Impact Protections</h1>
-            <h1>Log History</h1>
+              <h1 id="critical-impact-protections">Critical Impact Protections</h1>
+              <h1>Log History</h1>
           </div>
           
           <table class="protection-table">
@@ -74,29 +74,36 @@
   </div>
 
   <script>
-    document.getElementById('stateToggle').addEventListener('change', function() {
-        const stateStatus = document.querySelector('.state-status');
-        if (this.checked) {
-            stateStatus.textContent = 'Enabled';
-        } else {
-            stateStatus.textContent = 'Disabled';
-        }
-    });
+      document.getElementById('stateToggle').addEventListener('change', function() {
+          const stateStatus = document.querySelector('.state-status');
+          const modeOptions = document.querySelectorAll('input[name="mode"]');
+          const monitorOption = document.querySelector('input[name="mode"][value="monitor"]');
+          
+          if (this.checked) {
+              stateStatus.textContent = 'Enabled';
+              modeOptions.forEach(option => option.disabled = false);
+              monitorOption.checked = true;
+          } else {
+              stateStatus.textContent = 'Disabled';
+              modeOptions.forEach(option => option.disabled = true);
+              monitorOption.checked = true;
+          }
+      });
 
-    document.querySelectorAll('.header-container h1').forEach(item => {
-        item.addEventListener('click', event => {
-            // Remove the active class from all h1 elements
-            document.querySelectorAll('.header-container h1').forEach(h1 => {
-                h1.classList.remove('active');
-            });
-            
-            // Add the active class to the clicked h1 element
-            item.classList.add('active');
-        });
-    });
+      document.querySelectorAll('.header-container h1').forEach(item => {
+          item.addEventListener('click', event => {
+              // Remove the active class from all h1 elements
+              document.querySelectorAll('.header-container h1').forEach(h1 => {
+                  h1.classList.remove('active');
+              });
+              
+              // Add the active class to the clicked h1 element
+              item.classList.add('active');
+          });
+      });
 
-    // Set the default active header
-    document.getElementById('critical-impact-protections').classList.add('active');
-</script>
+      // Set the default active header
+      document.getElementById('critical-impact-protections').classList.add('active');
+  </script>
 </body>
 </html>
