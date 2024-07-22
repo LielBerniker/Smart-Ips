@@ -7,12 +7,17 @@ body {
   width: 100%; /* Ensure the container takes up full width */
 }
 
-.left-table {
+.left-table-wrapper {
   width: 25%; /* Ensure the left table takes up 25% of the width */
   border: 3px solid #2e3f58; /* Thicker border */
-  border-collapse: collapse;
-  border-radius: 10px; /* More rounded corners */
+  border-radius: 5px; /* More rounded corners */
   margin: 10px;
+  overflow: hidden; /* Ensure the rounded corners are visible */
+}
+
+.left-table {
+  width: 100%;
+  border-collapse: collapse;
 }
 
 .policy-header {
@@ -20,6 +25,7 @@ body {
   color: white;
   padding: 10px;
   text-align: left;
+  font-size: 12px;
 }
 
 .protection-table-container {
@@ -27,7 +33,7 @@ body {
   border: 3px solid #2e3f58; /* Dark blue border around all elements */
   padding: 0;
   margin: 10px;
-  height: 300px; /* Fixed height */
+  height: 270px; /* Fixed height */
   box-sizing: border-box; /* Include padding and border in height calculation */
   border-radius: 5px;
   display: flex;
@@ -76,6 +82,7 @@ body {
   border: none;
   padding: 10px;
   text-align: left;
+    font-size: 12px;
 }
 
 .protection-table-th {
