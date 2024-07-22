@@ -39,6 +39,15 @@ function onCommitfetchLocal(value) {
   }
 }
 
+function needNewGWreport(currentTime, storedTime) {
+  const timeDifference = (currentTime - storedTime) / (1000 * 60); // Convert milliseconds to minutes
+  if (timeDifference > 10) {
+    return true
+  }
+  return false
+}
+
+
 function runLocalFetchOnGW() {
 
   const fetchLocalCli = "fw fetch local"
@@ -181,10 +190,7 @@ function updateLocalStorge() {
   console.log("Finish to update local storage");
 }
 
-function readFromLocalStorge() {
-  console.log(smartDpiInformationKey);
-  smartDpiInformation = localStorage.getItem(smartDpiInformationKey);
-  const parsedSmartDpiInformation = JSON.parse(smartDpiInformation);
+function readFromLocalStorge(parsedSmartDpiInformation) {
   console.log(parsedSmartDpiInformation.isEnabled);
   console.log(parsedSmartDpiInformation.mode);
   console.log(parsedSmartDpiInformation.threshold);
@@ -376,7 +382,15 @@ function onContext(obj) {
   {
     RunConfigReport()
   }else{
-    readFromLocalStorge()
+    const currentTime = new Date();
+    const storedData = localStorage.getItem(smartDpiInformationKey);
+    const parsedData = JSON.parse(storedData);
+    const storedTime = new Date(parsedData.timestamp);
+    if (needNewGWreport(currentTime, storedTime)) {
+      RunConfigReport()
+    } else {
+      readFromLocalStorge(parsedData)
+    }
   }
 }
 
