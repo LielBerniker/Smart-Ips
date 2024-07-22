@@ -169,12 +169,38 @@ function runUpdateConfigOnGW() {
 function updateLocalStorge() {
   console.log(smartDpiInformationKey);
   const SmartDpiObject = {
-    enabled: window.currentGatewayInfo.isEnabled,
-    state: window.currentGatewayInfo.mode,
-    threshold: window.currentGatewayInfo.threshold
+    isEnabled: window.currentGatewayInfo.isEnabled,
+    mode: window.currentGatewayInfo.mode,
+    threshold: window.currentGatewayInfo.threshold,
+    protections: window.currentGatewayInfo.protections,
+    history: window.currentGatewayInfo.history
   };
   localStorage.setItem(smartDpiInformationKey, JSON.stringify(SmartDpiObject));
   console.log("Finish to update local storage");
+}
+
+function readFromLocalStorge() {
+  console.log(smartDpiInformationKey);
+  smartDpiInformation = localStorage.getItem(smartDpiInformationKey);
+  const parsedSmartDpiInformation = JSON.parse(smartDpiInformation);
+  window.currentGatewayInfo.isEnabled = Number(parsedSmartDpiInformation.isEnabled);
+  window.currentGatewayInfo.mode = parsedSmartDpiInformation.mode;
+  window.currentGatewayInfo.threshold = Number(parsedSmartDpiInformation.threshold);
+
+  // Reconstruct protections array
+  parsedSmartDpiInformation.protections.forEach(protection => {
+    const protectionInfo = new ProtectionInformation(protection.name, protection.date, protection.status);
+    window.currentGatewayInfo.protections.push(protectionInfo);
+  });
+
+  // Reconstruct history array
+  parsedSmartDpiInformation.history.forEach(historyItem => {
+    const historyInfo = new ProtectionInformation(historyItem.name, historyItem.date, historyItem.status);
+    window.currentGatewayInfo.history.push(historyInfo);
+  });
+
+  console.log("Finish to get data from local storage local storage");
+  initParameters();
 }
 
 function initParameters() {
@@ -335,22 +361,14 @@ function onContext(obj) {
   window.gatewayName = obj.event.objects[0]["name"];
   smartDpiInformationKey += "_" + window.gatewayName;
   console.log(smartDpiInformationKey);
-  const mgmtCli = `run-script script-name "smart_dpi_config_report" script "${smartDpiConfigReport}" targets.1 "${window.gatewayName}" --format json`;
-  smxProxy.sendRequest("request-commit", {"commands" : [mgmtCli]}, "onCommitReport");
-  // if (!localStorage.hasOwnProperty(smartDpiInformationKey))
-  // {
-  //   // send API request
-  //   const mgmtCli = `run-script script-name "smart_dpi_config_report" script "${smartDpiConfigReport}" targets.1 "${window.gatewayName}" --format json`;
-  //   smxProxy.sendRequest("request-commit", {"commands" : [mgmtCli]}, "onCommitReport");
-  // }else{
-  //   smartDpiInformation = localStorage.getItem(smartDpiInformationKey);
-  //   const parsedSmartDpiInformation = JSON.parse(smartDpiInformation);
-  //   window.currentGatewayInfo.isEnabled = Number(parsedSmartDpiInformation.enabled);
-  //   window.currentGatewayInfo.mode = parsedSmartDpiInformation.state;
-  //   window.currentGatewayInfo.threshold = Number(parsedSmartDpiInformation.threshold);
-  //   initParameters();
-  // }
-  // }
+  if (!localStorage.hasOwnProperty(smartDpiInformationKey))
+  {
+    // send API request
+    const mgmtCli = `run-script script-name "smart_dpi_config_report" script "${smartDpiConfigReport}" targets.1 "${window.gatewayName}" --format json`;
+    smxProxy.sendRequest("request-commit", {"commands" : [mgmtCli]}, "onCommitReport");
+  }else{
+    readFromLocalStorge()
+  }
 }
 
 

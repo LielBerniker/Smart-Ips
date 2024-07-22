@@ -125,7 +125,7 @@ button {
   align-items: center;
   margin-bottom: 10px;
   margin-left: 20px; /* Add margin to move the elements to the right */
-  padding-top: 20px; /* Add padding at the top */
+  padding-top: 15px; /* Add padding at the top */
 }
 
 .state-text, .mode-text, .threshold-wrapper label {
