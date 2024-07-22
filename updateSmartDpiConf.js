@@ -41,7 +41,7 @@ function onCommitfetchLocal(value) {
 
 function needNewGWreport(currentTime, storedTime) {
   const timeDifference = (currentTime - storedTime) / (1000 * 60); // Convert milliseconds to minutes
-  if (timeDifference > 10) {
+  if (timeDifference > 3) {
     return true
   }
   return false
