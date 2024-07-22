@@ -168,12 +168,14 @@ function runUpdateConfigOnGW() {
 
 function updateLocalStorge() {
   console.log(smartDpiInformationKey);
+  const currentTime = new Date().toISOString();
   const SmartDpiObject = {
     isEnabled: window.currentGatewayInfo.isEnabled,
     mode: window.currentGatewayInfo.mode,
     threshold: window.currentGatewayInfo.threshold,
     protections: window.currentGatewayInfo.protections,
-    history: window.currentGatewayInfo.history
+    history: window.currentGatewayInfo.history,
+    timestamp: currentTime
   };
   localStorage.setItem(smartDpiInformationKey, JSON.stringify(SmartDpiObject));
   console.log("Finish to update local storage");
@@ -183,6 +185,9 @@ function readFromLocalStorge() {
   console.log(smartDpiInformationKey);
   smartDpiInformation = localStorage.getItem(smartDpiInformationKey);
   const parsedSmartDpiInformation = JSON.parse(smartDpiInformation);
+  console.log(parsedSmartDpiInformation.isEnabled);
+  console.log(parsedSmartDpiInformation.mode);
+  console.log(parsedSmartDpiInformation.threshold);
   window.currentGatewayInfo.isEnabled = Number(parsedSmartDpiInformation.isEnabled);
   window.currentGatewayInfo.mode = parsedSmartDpiInformation.mode;
   window.currentGatewayInfo.threshold = Number(parsedSmartDpiInformation.threshold);
@@ -212,7 +217,7 @@ function initParameters() {
   const monitorOption = document.querySelector('input[name="mode"][value="monitor"]');
   const actionOption = document.querySelector('input[name="mode"][value="action"]');
   const thresholdInput = document.getElementById('threshold');
-
+  console.log(window.currentGatewayInfo.isEnabled);
   // Set initial state
   if (window.currentGatewayInfo.isEnabled === 1) {
     stateToggle.checked = true;
@@ -222,7 +227,7 @@ function initParameters() {
     stateStatus.textContent = disabledStr;
   }
   modeOptions.forEach(option => option.disabled = !stateToggle.checked);
-
+  console.log(window.currentGatewayInfo.mode);
   // Set initial mode
   if (window.currentGatewayInfo.mode === monitorStr) {
       monitorOption.checked = true;
@@ -276,6 +281,7 @@ document.querySelector('button[type="submit"]').addEventListener('click', functi
   window.currentGatewayInfo.mode = selectedMode;
   window.currentGatewayInfo.threshold = threshold;
   runUpdateConfigOnGW();
+  updateLocalStorge()
 });
 
 document.querySelectorAll('.header-container h1').forEach(item => {
@@ -356,6 +362,12 @@ function onCommitReport(value) {
   }
 }
 
+function RunConfigReport() {
+  // send API request
+  const mgmtCli = `run-script script-name "smart_dpi_config_report" script "${smartDpiConfigReport}" targets.1 "${window.gatewayName}" --format json`;
+  smxProxy.sendRequest("request-commit", {"commands" : [mgmtCli]}, "onCommitReport");
+}
+
 function onContext(obj) {
 
   window.gatewayName = obj.event.objects[0]["name"];
@@ -363,14 +375,11 @@ function onContext(obj) {
   console.log(smartDpiInformationKey);
   if (!localStorage.hasOwnProperty(smartDpiInformationKey))
   {
-    // send API request
-    const mgmtCli = `run-script script-name "smart_dpi_config_report" script "${smartDpiConfigReport}" targets.1 "${window.gatewayName}" --format json`;
-    smxProxy.sendRequest("request-commit", {"commands" : [mgmtCli]}, "onCommitReport");
+    RunConfigReport()
   }else{
     readFromLocalStorge()
   }
 }
-
 
 /*
  * Send API request 'get-context' (get-context return JSON object of extension location context).
