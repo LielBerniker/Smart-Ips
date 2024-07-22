@@ -254,7 +254,11 @@ document.querySelector('button[type="submit"]').addEventListener('click', functi
 
 document.querySelectorAll('.header-container h1').forEach(item => {
   item.addEventListener('click', event => {
-      // Remove the active class from all h1 elements
+
+      if (item.classList.contains('active')) {
+        return; // Do nothing if it's already active
+      }
+      // Remove the active class from all h1 elements 
       document.querySelectorAll('.header-container h1').forEach(h1 => {
           h1.classList.remove('active');
       });
