@@ -8,69 +8,102 @@
 <body onload="showContext()">
   <script src="updateSmartDpiConf.js"></script>
   <div class="table-container">
-      <table class="left-table">
-          <thead>
-              <tr>
-                  <th class="policy-header">Policy</th>
-              </tr>
-          </thead>
-          <tbody>
-              <tr>
-                  <td>
-                      <div class="config-container">
-                          <div class="state-wrapper">
-                              <span class="state-text">State:</span>
-                              <label class="switch">
-                                  <input type="checkbox" id="stateToggle">
-                                  <span class="slider"></span>
-                              </label>
-                              <span class="state-status">Disabled</span>
-                          </div>
-                          <div class="mode-wrapper">
-                              <span class="mode-text">Mode:</span>
-                              <div class="radio-options">
-                                  <label>
-                                      <input type="radio" name="mode" value="monitor" disabled> Monitor
-                                  </label>
-                                  <label>
-                                      <input type="radio" name="mode" value="action" disabled> Action
-                                  </label>
-                              </div>
-                          </div>
-                          <div class="threshold-wrapper">
-                              <label for="threshold">Threshold (%):</label>
-                              <input type="number" id="threshold" name="threshold" min="1" max="100">
-                          </div>
-                          <button type="submit">Submit</button>
-                      </div>
-                  </td>
-              </tr>
-          </tbody>
-      </table>
-      <div class="protection-table-container">
-          <div class="header-container">
-              <h1 id="critical-impact-protections">Critical Impact Protections</h1>
-              <h1>Log History</h1>
+    <table class="left-table">
+        <thead>
+            <tr>
+                <th class="policy-header">Policy</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>
+                    <div class="config-container">
+                        <div class="state-wrapper">
+                            <span class="state-text">State:</span>
+                            <label class="switch">
+                                <input type="checkbox" id="stateToggle">
+                                <span class="slider"></span>
+                            </label>
+                            <span class="state-status">Disabled</span>
+                        </div>
+                        <div class="mode-wrapper">
+                            <span class="mode-text">Mode:</span>
+                            <div class="radio-options">
+                                <label>
+                                    <input type="radio" name="mode" value="monitor" disabled> Monitor
+                                </label>
+                                <label>
+                                    <input type="radio" name="mode" value="action" disabled> Action
+                                </label>
+                            </div>
+                        </div>
+                        <div class="threshold-wrapper">
+                            <label for="threshold">Threshold (%):</label>
+                            <input type="number" id="threshold" name="threshold" min="1" max="100">
+                        </div>
+                        <button type="submit">Submit</button>
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <div class="protection-table-container">
+        <div class="header-container">
+            <h1 id="critical-impact-protections">Critical Impact Protections</h1>
+            <h1>Log History</h1>
+        </div>
+        <div class="protection-table-wrapper">
+            <table class="protection-table">
+                <thead>
+                    <tr>
+                        <th class="protection-table-th">Name</th>
+                        <th class="protection-table-th">Date</th>
+                        <th class="protection-table-th">Status</th>
+                    </tr>
+                </thead>
+                <tbody class="protection-table-tbody">
+                    <tr>
+                        <td class="protection-table-td">Protection A</td>
+                        <td class="protection-table-td">12.5.2024</td>
+                        <td class="protection-table-td">Enabled</td>
+                    </tr>
+                                      <tr>
+                        <td class="protection-table-td">Protection A</td>
+                        <td class="protection-table-td">12.5.2024</td>
+                        <td class="protection-table-td">Enabled</td>
+                    </tr>                  <tr>
+                        <td class="protection-table-td">Protection A</td>
+                        <td class="protection-table-td">12.5.2024</td>
+                        <td class="protection-table-td">Enabled</td>
+                    </tr>
+                                      <tr>
+                        <td class="protection-table-td">Protection A</td>
+                        <td class="protection-table-td">12.5.2024</td>
+                        <td class="protection-table-td">Enabled</td>
+                    </tr>
+                                          </tr>
+                                      <tr>
+                        <td class="protection-table-td">Protection A</td>
+                        <td class="protection-table-td">12.5.2024</td>
+                        <td class="protection-table-td">Enabled</td>
+                    </tr>
+                                          </tr>
+                                      <tr>
+                        <td class="protection-table-td">Protection A</td>
+                        <td class="protection-table-td">12.5.2024</td>
+                        <td class="protection-table-td">Enabled</td>
+                    </tr>
+                                          </tr>
+                                      <tr>
+                        <td class="protection-table-td">Protection A</td>
+                        <td class="protection-table-td">12.5.2024</td>
+                        <td class="protection-table-td">Enabled</td>
+                    </tr>
+
+                </tbody>
+            </table>
           </div>
-          
-          <table class="protection-table">
-              <thead>
-                  <tr>
-                      <th class="protection-table-th">Name</th>
-                      <th class="protection-table-th">Date</th>
-                      <th class="protection-table-th">Status</th>
-                  </tr>
-              </thead>
-              <tbody class="protection-table-tbody">
-                  <tr>
-                      <td class="protection-table-td">Protection A</td>
-                      <td class="protection-table-td">12.5.2024</td>
-                      <td class="protection-table-td">Enabled</td>
-                  </tr>
-                  <!-- Add more rows as needed -->
-              </tbody>
-          </table>
-      </div>
-  </div>
+    </div>
+</div>
 </body>
 </html>

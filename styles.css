@@ -11,7 +11,7 @@ body {
   width: 25%; /* Ensure the left table takes up 25% of the width */
   border: 3px solid #2e3f58; /* Thicker border */
   border-collapse: collapse;
-  border-radius: 5px; /* Less rounded corners */
+  border-radius: 10px; /* More rounded corners */
   margin: 10px;
 }
 
@@ -29,7 +29,9 @@ body {
   margin: 10px;
   height: 300px; /* Fixed height */
   box-sizing: border-box; /* Include padding and border in height calculation */
-  border-radius: 5px; 
+  border-radius: 5px;
+  display: flex;
+  flex-direction: column;
 }
 
 .header-container {
@@ -44,7 +46,7 @@ body {
   color: white; /* White text color */
   padding: 15px; /* Padding for better appearance */
   box-sizing: border-box; /* Include padding in width calculation */
-  font-size: 16px; /* Smaller text size */
+  font-size: 12px; /* Smaller text size */
   cursor: pointer; /* Cursor changes to pointer */
 }
 
@@ -53,11 +55,21 @@ body {
   background-color: #3a4a6b; /* Slightly lighter background color when active */
 }
 
+.protection-table-wrapper {
+  flex: 1; /* Allow the wrapper to grow and take up available space */
+  overflow-y: auto; /* Enable vertical scrolling */
+}
+
 .protection-table {
   width: 100%;
   border-collapse: collapse;
   margin: 0;
-  border-bottom: 3px solid #d3d3d3; /* Light grey border at the bottom */
+  table-layout: fixed; /* Ensure the table layout is fixed */
+  border-bottom: 3px solid #d3d3d3;
+}
+
+.protection-table thead, .protection-table tbody {
+  width: 100%;
 }
 
 .protection-table-th, .protection-table-td {
