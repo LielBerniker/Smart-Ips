@@ -78,11 +78,27 @@ body {
   width: 100%;
 }
 
-.protection-table-th, .protection-table-td {
+.protection-table-th, .protection-table-td, .protection-table-td-status-Update, .protection-table-td-status-Disabled, .protection-table-td-status-Recommended, .protection-table-td-status-Enabled {
   border: none;
   padding: 10px;
   text-align: left;
-    font-size: 12px;
+  font-size: 12px;
+}
+
+.protection-table-td-status-Update {
+  color: #2a5c92;
+}
+
+.protection-table-td-status-Disabled {
+  color: #b11414;
+}
+
+.protection-table-td-status-Recommended {
+  color: #ffb829;
+}
+
+.protection-table-td-status-Enabled {
+  color: #55b503;
 }
 
 .protection-table-th {
