@@ -50,7 +50,7 @@ body {
   margin: 0; /* Remove margins */
   background-color: #2e3f58; /* Dark blue background */
   color: white; /* White text color */
-  padding: 15px; /* Padding for better appearance */
+  padding: 10px; /* Padding for better appearance */
   box-sizing: border-box; /* Include padding in width calculation */
   font-size: 12px; /* Smaller text size */
   cursor: pointer; /* Cursor changes to pointer */
@@ -109,7 +109,7 @@ button {
   align-items: center;
   margin-bottom: 10px;
   margin-left: 20px; /* Add margin to move the elements to the right */
-  padding-top: 4px; /* Add padding at the top */
+  padding-top: 6px; /* Add padding at the top */
 }
 
 .state-text, .mode-text, .threshold-wrapper label {
