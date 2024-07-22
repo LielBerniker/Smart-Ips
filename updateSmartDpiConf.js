@@ -318,7 +318,6 @@ document.querySelectorAll('.header-container h1').forEach(item => {
 });
 
 // Set the default active header
-document.getElementById('critical-impact-protections').classList.add('active');
 document.getElementById('critical-impact-protections').click();
 
 }
