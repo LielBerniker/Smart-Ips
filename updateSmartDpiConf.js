@@ -158,7 +158,7 @@ function onCommitUpdate(value) {
       console.log('fail to update Smart Dpi configuration');
     }
     else{
-      updateLocalStorge()
+      RunConfigReport()
       runLocalFetchOnGW()
     }
   }
@@ -212,7 +212,6 @@ function readFromLocalStorge(parsedSmartDpiInformation) {
   });
 
   console.log("Finish to get data from local storage local storage");
-  initParameters();
 }
 
 function initParameters() {
@@ -288,7 +287,6 @@ document.querySelector('button[type="submit"]').addEventListener('click', functi
   window.currentGatewayInfo.mode = selectedMode;
   window.currentGatewayInfo.threshold = threshold;
   runUpdateConfigOnGW();
-  updateLocalStorge()
 });
 
 document.querySelectorAll('.header-container h1').forEach(item => {
@@ -365,7 +363,6 @@ function onCommitReport(value) {
       }
       else{
         updateLocalStorge()
-        initParameters()
       }
     }
   }
@@ -396,6 +393,7 @@ function onContext(obj) {
       readFromLocalStorge(parsedData)
     }
   }
+  initParameters()
 }
 
 /*
