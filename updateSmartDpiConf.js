@@ -250,7 +250,7 @@ function readFromLocalStorge(parsedSmartDpiInformation) {
     window.currentGatewayInfo.history.push(historyInfo);
   });
   updateByConfiguration()
-  console.log("Finish to get data from local storage local storage");
+  console.log("Finish to get data from local storage");
   removeLoader()
 }
 
