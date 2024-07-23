@@ -14,7 +14,7 @@
       "relevant-types": ["gateways"],
       "ui-element": {
         "type": "tab",
-        "caption": "Smart-Ips",
+        "caption": "Smart IPS",
         "tooltip": "Update Smart Ips configuration",
         "action": {
           "details-level": "full",
