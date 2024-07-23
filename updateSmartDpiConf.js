@@ -300,7 +300,7 @@ document.querySelectorAll('.header-container h1').forEach(item => {
       document.querySelectorAll('.header-container h1').forEach(h1 => {
           h1.classList.remove('active');
       });
-
+      console.log(item.textContent);
       // Add the active class to the clicked h1 element
       item.classList.add('active');
 
@@ -315,6 +315,8 @@ document.querySelectorAll('.header-container h1').forEach(item => {
           } else {
             tdClassStatus += row.status;
           }
+          console.log(row.name);
+          console.log(row.status);
           tr.innerHTML = `<td class="protection-table-td">${row.name}</td>
                           <td class="protection-table-td">${row.date}</td>
                           <td class="${tdClassStatus}">${row.status}</td>`;
