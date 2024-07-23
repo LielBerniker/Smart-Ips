@@ -25,7 +25,8 @@ const monitorStr = "Monitor"
 const actionStr = "Action"
 const enabledStr = "Enabled"
 const disabledStr = "Disabled"
-const modeStateUpdate = "Mode/State update"
+const modeUpdate = "Mode update"
+const stateUpdate = "State update"
 
 var smartDpiInformationKey = "smart_dpi_information";
 
@@ -310,7 +311,7 @@ document.querySelectorAll('.header-container h1').forEach(item => {
       tableInformationList.forEach(row => {
           const tr = document.createElement('tr');
           tdClassStatus = "protection-table-td-status-"
-          if (row.status === modeStateUpdate) {
+          if (row.status === modeUpdate || row.status === stateUpdate) {
             tdClassStatus += "Update";
           } else {
             tdClassStatus += row.status;
