@@ -253,7 +253,7 @@ function initParameters() {
   }
 
 
-  document.getElementById('stateToggle').addEventListener('change', function() {
+document.getElementById('stateToggle').addEventListener('change', function() {
     const stateStatus = document.querySelector('.state-status');
     const modeOptions = document.querySelectorAll('input[name="mode"]');
     const monitorOption = document.querySelector('input[name="mode"][value="monitor"]');
@@ -269,71 +269,63 @@ function initParameters() {
     }
 });
 
-  document.querySelector('button[type="submit"]').addEventListener('click', function(event) {
-    event.preventDefault(); // Prevent form submission
-    const thresholdInput = document.getElementById('threshold');
-    const thresholdValue = parseInt(thresholdInput.value, 10);
+document.querySelector('button[type="submit"]').addEventListener('click', function(event) {
+  event.preventDefault(); // Prevent form submission
+  const thresholdInput = document.getElementById('threshold');
+  const thresholdValue = parseInt(thresholdInput.value, 10);
 
-    if (thresholdValue < 1 || thresholdValue > 100) {
-        alert('Please insert a valid threshold percentage, between 1 to 100.');
-        return;
-    }
+  if (thresholdValue < 1 || thresholdValue > 100) {
+      alert('Please insert a valid threshold percentage, between 1 to 100.');
+      return;
+  }
 
-    const stateEnabled = document.getElementById('stateToggle').checked;
-    const selectedMode = document.querySelector('input[name="mode"]:checked').value;
-    const threshold = thresholdInput.value;
+  const stateEnabled = document.getElementById('stateToggle').checked;
+  const selectedMode = document.querySelector('input[name="mode"]:checked').value;
+  const threshold = thresholdInput.value;
 
-    window.currentGatewayInfo.isEnabled = stateEnabled ? 1 : 0;
-    window.currentGatewayInfo.mode = selectedMode;
-    window.currentGatewayInfo.threshold = threshold;
-    runUpdateConfigOnGW();
-    updateLocalStorge()
-  });
+  window.currentGatewayInfo.isEnabled = stateEnabled ? 1 : 0;
+  window.currentGatewayInfo.mode = selectedMode;
+  window.currentGatewayInfo.threshold = threshold;
+  runUpdateConfigOnGW();
+  updateLocalStorge()
+});
 
-  document.addEventListener('DOMContentLoaded', (event) => {
-
-    // Use event delegation to attach a single event listener to the parent container
-    const headerContainer = document.querySelector('.header-container');
-    headerContainer.addEventListener('click', (event) => {
-      const item = event.target.closest('h1');
-      if (!item) return; // If the clicked element is not an h1, do nothing
+document.querySelectorAll('.header-container h1').forEach(item => {
+  item.addEventListener('click', event => {
 
       if (item.classList.contains('active')) {
         return; // Do nothing if it's already active
       }
-
       // Remove the active class from all h1 elements 
       document.querySelectorAll('.header-container h1').forEach(h1 => {
-        h1.classList.remove('active');
+          h1.classList.remove('active');
       });
 
       // Add the active class to the clicked h1 element
       item.classList.add('active');
 
-      const tableInformationList = (item.textContent === 'Critical Impact Protections') ? window.currentGatewayInfo.protections : window.currentGatewayInfo.history;
+      tableInformationList = (item.textContent === 'Critical Impact Protections') ? window.currentGatewayInfo.protections : window.currentGatewayInfo.history;
       const tbody = document.querySelector('.protection-table-tbody');
       tbody.innerHTML = ''; // Clear existing rows
       tableInformationList.forEach(row => {
-        const tr = document.createElement('tr');
-        let tdClassStatus = "protection-table-td-status-";
-        if (row.status === modeStateUpdate) {
-          tdClassStatus += "Update";
-        } else {
-          tdClassStatus += row.status;
-        }
-        tr.innerHTML = `<td class="protection-table-td">${row.name}</td>
-                        <td class="protection-table-td">${row.date}</td>
-                        <td class="${tdClassStatus}">${row.status}</td>`;
-        tbody.appendChild(tr);
+          const tr = document.createElement('tr');
+          tdClassStatus = "protection-table-td-status-"
+          if (row.status === modeStateUpdate) {
+            tdClassStatus += "Update";
+          } else {
+            tdClassStatus += row.status;
+          }
+          tr.innerHTML = `<td class="protection-table-td">${row.name}</td>
+                          <td class="protection-table-td">${row.date}</td>
+                          <td class="${tdClassStatus}">${row.status}</td>`;
+          tbody.appendChild(tr);
       });
-    });
-
-    // Trigger the initial click on the element with ID 'critical-impact-protections'
-    const initialClick = document.getElementById('critical-impact-protections');
-    if (initialClick) {
-      initialClick.click();
-    }
   });
+});
+
+
+// Set the default active header
+document.getElementById('critical-impact-protections').click();
 
 }
 
