@@ -214,10 +214,11 @@ function readFromLocalStorge(parsedSmartDpiInformation) {
   });
 
   console.log("Finish to get data from local storage local storage");
+  removeLoader()
 }
 
 function initParameters() {
-  removeLoader()
+ 
 
   const stateToggle = document.getElementById('stateToggle');
   const stateStatus = document.querySelector('.state-status');
@@ -280,7 +281,7 @@ document.querySelector('button[type="submit"]').addEventListener('click', functi
       alert('Please insert a valid threshold percentage, between 1 to 100.');
       return;
   }
-
+  addLoader();
   const stateEnabled = document.getElementById('stateToggle').checked;
   const selectedMode = document.querySelector('input[name="mode"]:checked').value;
   const threshold = thresholdInput.value;
@@ -366,6 +367,7 @@ function onCommitReport(value) {
       else{
         updateLocalStorge()
       }
+      removeLoader()
     }
   }
 }
