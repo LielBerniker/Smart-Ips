@@ -88,6 +88,7 @@ function isTaskSucceeded(item) {
 }
 
 function updateProtections(protectionsArray) {
+  window.currentGatewayInfo.protections.splice(0)
   for (protectionConf of protectionsArray) {
     console.log(protectionConf.protection_name)
     console.log(protectionConf.status)
@@ -97,6 +98,7 @@ function updateProtections(protectionsArray) {
 }
 
 function updateHistory(historyArray) {
+  window.currentGatewayInfo.history.splice(0)
   for (historyLog of historyArray) {
     console.log(historyLog.protection_name)
     console.log(historyLog.status)
