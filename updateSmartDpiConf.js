@@ -33,6 +33,43 @@ var smartDpiInformationKey = "smart_dpi_information";
 window.gatewayName;
 window.currentGatewayInfo = new GatewayConfigInfo(0, monitorStr, 60);
 
+function updateByConfiguration() {
+  const stateToggle = document.getElementById('stateToggle');
+  const stateStatus = document.querySelector('.state-status');
+  const modeOptions = document.querySelectorAll('input[name="mode"]');
+  const monitorOption = document.querySelector('input[name="mode"][value="monitor"]');
+  const actionOption = document.querySelector('input[name="mode"][value="action"]');
+  const thresholdInput = document.getElementById('threshold');
+
+  // Set initial state
+  if (window.currentGatewayInfo.isEnabled === 1) {
+    stateToggle.checked = true;
+    stateStatus.textContent = enabledStr;
+  } else {
+    stateToggle.checked = false;
+    stateStatus.textContent = disabledStr;
+  }
+  modeOptions.forEach(option => option.disabled = !stateToggle.checked);
+
+  // Set initial mode
+  if (window.currentGatewayInfo.mode === monitorStr) {
+      monitorOption.checked = true;
+  } else if (window.currentGatewayInfo.mode === actionStr) {
+      actionOption.checked = true;
+  }
+
+  // Set initial threshold
+  thresholdInput.value = window.currentGatewayInfo.threshold;
+
+  // Ensure initial mode is set correctly
+  if (window.currentGatewayInfo.isEnabled === 1) {
+      modeOptions.forEach(option => option.disabled = false);
+  } else {
+      monitorOption.checked = true;
+      modeOptions.forEach(option => option.disabled = true);
+  }
+}
+
 function onCommitfetchLocal(value) {
   if (Array.isArray(value) && value.length > 0) {
     var firstItem = value[0];
@@ -133,7 +170,7 @@ function getConfigurationData(item) {
           window.currentGatewayInfo.isEnabled = 0
       }
       window.currentGatewayInfo.threshold = Number(parsedResponse.threshold);
-      
+      updateByConfiguration()
       updateProtections(parsedResponse.protections.reverse())
       updateHistory(parsedResponse.history.reverse())
       console.log('successfully got gateway configuration information'); 
@@ -212,7 +249,7 @@ function readFromLocalStorge(parsedSmartDpiInformation) {
     const historyInfo = new ProtectionInformation(historyItem.name, historyItem.date, historyItem.status);
     window.currentGatewayInfo.history.push(historyInfo);
   });
-
+  updateByConfiguration()
   console.log("Finish to get data from local storage local storage");
   removeLoader()
 }
@@ -220,116 +257,82 @@ function readFromLocalStorge(parsedSmartDpiInformation) {
 function initParameters() {
  
 
-  const stateToggle = document.getElementById('stateToggle');
-  const stateStatus = document.querySelector('.state-status');
-  const modeOptions = document.querySelectorAll('input[name="mode"]');
-  const monitorOption = document.querySelector('input[name="mode"][value="monitor"]');
-  const actionOption = document.querySelector('input[name="mode"][value="action"]');
-  const thresholdInput = document.getElementById('threshold');
-  console.log(window.currentGatewayInfo.isEnabled);
-  // Set initial state
-  if (window.currentGatewayInfo.isEnabled === 1) {
-    stateToggle.checked = true;
-    stateStatus.textContent = enabledStr;
-  } else {
-    stateToggle.checked = false;
-    stateStatus.textContent = disabledStr;
-  }
-  modeOptions.forEach(option => option.disabled = !stateToggle.checked);
-  console.log(window.currentGatewayInfo.mode);
-  // Set initial mode
-  if (window.currentGatewayInfo.mode === monitorStr) {
-      monitorOption.checked = true;
-  } else if (window.currentGatewayInfo.mode === actionStr) {
-      actionOption.checked = true;
-  }
+  updateByConfiguration()
 
-  // Set initial threshold
-  thresholdInput.value = window.currentGatewayInfo.threshold;
-
-  // Ensure initial mode is set correctly
-  if (window.currentGatewayInfo.isEnabled === 1) {
-      modeOptions.forEach(option => option.disabled = false);
-  } else {
-      monitorOption.checked = true;
-      modeOptions.forEach(option => option.disabled = true);
-  }
-
-
-document.getElementById('stateToggle').addEventListener('change', function() {
-    const stateStatus = document.querySelector('.state-status');
-    const modeOptions = document.querySelectorAll('input[name="mode"]');
-    const monitorOption = document.querySelector('input[name="mode"][value="monitor"]');
-    
-    if (this.checked) {
-        stateStatus.textContent = 'Enabled';
-        modeOptions.forEach(option => option.disabled = false);
-        monitorOption.checked = true;
-    } else {
-        stateStatus.textContent = 'Disabled';
-        modeOptions.forEach(option => option.disabled = true);
-        monitorOption.checked = true;
-    }
-});
-
-document.querySelector('button[type="submit"]').addEventListener('click', function(event) {
-  event.preventDefault(); // Prevent form submission
-  const thresholdInput = document.getElementById('threshold');
-  const thresholdValue = parseInt(thresholdInput.value, 10);
-
-  if (thresholdValue < 1 || thresholdValue > 100) {
-      alert('Please insert a valid threshold percentage, between 1 to 100.');
-      return;
-  }
-  addLoader();
-  const stateEnabled = document.getElementById('stateToggle').checked;
-  const selectedMode = document.querySelector('input[name="mode"]:checked').value;
-  const threshold = thresholdInput.value;
-
-  window.currentGatewayInfo.isEnabled = stateEnabled ? 1 : 0;
-  window.currentGatewayInfo.mode = selectedMode;
-  window.currentGatewayInfo.threshold = threshold;
-  runUpdateConfigOnGW();
-});
-
-document.querySelectorAll('.header-container h1').forEach(item => {
-  item.addEventListener('click', event => {
-
-      if (item.classList.contains('active')) {
-        return; // Do nothing if it's already active
+  document.getElementById('stateToggle').addEventListener('change', function() {
+      const stateStatus = document.querySelector('.state-status');
+      const modeOptions = document.querySelectorAll('input[name="mode"]');
+      const monitorOption = document.querySelector('input[name="mode"][value="monitor"]');
+      
+      if (this.checked) {
+          stateStatus.textContent = 'Enabled';
+          modeOptions.forEach(option => option.disabled = false);
+          monitorOption.checked = true;
+      } else {
+          stateStatus.textContent = 'Disabled';
+          modeOptions.forEach(option => option.disabled = true);
+          monitorOption.checked = true;
       }
-      // Remove the active class from all h1 elements 
-      document.querySelectorAll('.header-container h1').forEach(h1 => {
-          h1.classList.remove('active');
-      });
-      console.log(item.textContent);
-      // Add the active class to the clicked h1 element
-      item.classList.add('active');
-
-      tableInformationList = (item.textContent === 'Critical Impact Protections') ? window.currentGatewayInfo.protections : window.currentGatewayInfo.history;
-      const tbody = document.querySelector('.protection-table-tbody');
-      tbody.innerHTML = ''; // Clear existing rows
-      tableInformationList.forEach(row => {
-          const tr = document.createElement('tr');
-          tdClassStatus = "protection-table-td-status-"
-          if (row.status === modeUpdate || row.status === stateUpdate) {
-            tdClassStatus += "Update";
-          } else {
-            tdClassStatus += row.status;
-          }
-          console.log(row.name);
-          console.log(row.status);
-          tr.innerHTML = `<td class="protection-table-td">${row.name}</td>
-                          <td class="protection-table-td">${row.date}</td>
-                          <td class="${tdClassStatus}">${row.status}</td>`;
-          tbody.appendChild(tr);
-      });
   });
-});
+
+  document.querySelector('button[type="submit"]').addEventListener('click', function(event) {
+    event.preventDefault(); // Prevent form submission
+    const thresholdInput = document.getElementById('threshold');
+    const thresholdValue = parseInt(thresholdInput.value, 10);
+
+    if (thresholdValue < 1 || thresholdValue > 100) {
+        alert('Please insert a valid threshold percentage, between 1 to 100.');
+        return;
+    }
+    addLoader();
+    const stateEnabled = document.getElementById('stateToggle').checked;
+    const selectedMode = document.querySelector('input[name="mode"]:checked').value;
+    const threshold = thresholdInput.value;
+
+    window.currentGatewayInfo.isEnabled = stateEnabled ? 1 : 0;
+    window.currentGatewayInfo.mode = selectedMode;
+    window.currentGatewayInfo.threshold = threshold;
+    runUpdateConfigOnGW();
+  });
+
+  document.querySelectorAll('.header-container h1').forEach(item => {
+    item.addEventListener('click', event => {
+
+        if (item.classList.contains('active')) {
+          return; // Do nothing if it's already active
+        }
+        // Remove the active class from all h1 elements 
+        document.querySelectorAll('.header-container h1').forEach(h1 => {
+            h1.classList.remove('active');
+        });
+        console.log(item.textContent);
+        // Add the active class to the clicked h1 element
+        item.classList.add('active');
+
+        tableInformationList = (item.textContent === 'Critical Impact Protections') ? window.currentGatewayInfo.protections : window.currentGatewayInfo.history;
+        const tbody = document.querySelector('.protection-table-tbody');
+        tbody.innerHTML = ''; // Clear existing rows
+        tableInformationList.forEach(row => {
+            const tr = document.createElement('tr');
+            tdClassStatus = "protection-table-td-status-"
+            if (row.status === modeUpdate || row.status === stateUpdate) {
+              tdClassStatus += "Update";
+            } else {
+              tdClassStatus += row.status;
+            }
+            console.log(row.name);
+            console.log(row.status);
+            tr.innerHTML = `<td class="protection-table-td">${row.name}</td>
+                            <td class="protection-table-td">${row.date}</td>
+                            <td class="${tdClassStatus}">${row.status}</td>`;
+            tbody.appendChild(tr);
+        });
+    });
+  });
 
 
-// Set the default active header
-document.getElementById('critical-impact-protections').click();
+  // Set the default active header
+  document.getElementById('critical-impact-protections').click();
 
 }
 
