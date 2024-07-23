@@ -198,6 +198,7 @@ function onCommitUpdate(value) {
     }
     else{
       RunConfigReport()
+      updateLocalStorge()
       runLocalFetchOnGW()
     }
   }
