@@ -74,6 +74,7 @@ function onCommitfetchLocal(value) {
   if (Array.isArray(value) && value.length > 0) {
     var firstItem = value[0];
     console.log("Finish to run fw fetch local");
+    document.querySelector('button[type="submit"]').disabled = false;
   }
 }
 
@@ -278,6 +279,7 @@ function initParameters() {
 
   document.querySelector('button[type="submit"]').addEventListener('click', function(event) {
     event.preventDefault(); // Prevent form submission
+    event.target.disabled = true; 
     const thresholdInput = document.getElementById('threshold');
     const thresholdValue = parseInt(thresholdInput.value, 10);
 
