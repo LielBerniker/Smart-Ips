@@ -297,6 +297,9 @@ function initParameters() {
   });
 
   document.querySelectorAll('.header-container h1').forEach(item => {
+
+    if (item.dataset.listenerAdded) return;
+
     item.addEventListener('click', event => {
 
         if (item.classList.contains('active')) {
@@ -329,6 +332,8 @@ function initParameters() {
             tbody.appendChild(tr);
         });
     });
+    // Mark this item as having an event listener attached
+    item.dataset.listenerAdded = "true";
   });
 
 
