@@ -231,6 +231,7 @@ function updateLocalStorge() {
   localStorage.setItem(smartDpiInformationKey, JSON.stringify(SmartDpiObject));
   console.log("Finish to update local storage");
   document.getElementById('critical-impact-protections').click();
+  console.log("click on critical-impact-protections");
 }
 
 function readFromLocalStorge(parsedSmartDpiInformation) {
@@ -256,6 +257,7 @@ function readFromLocalStorge(parsedSmartDpiInformation) {
   console.log("Finish to get data from local storage");
 
   document.getElementById('critical-impact-protections').click();
+  console.log("click on critical-impact-protections");
   removeLoader()
 }
 
