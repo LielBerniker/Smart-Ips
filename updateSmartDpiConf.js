@@ -230,6 +230,7 @@ function updateLocalStorge() {
   };
   localStorage.setItem(smartDpiInformationKey, JSON.stringify(SmartDpiObject));
   console.log("Finish to update local storage");
+  document.getElementById('critical-impact-protections').click();
 }
 
 function readFromLocalStorge(parsedSmartDpiInformation) {
@@ -253,6 +254,8 @@ function readFromLocalStorge(parsedSmartDpiInformation) {
   });
   updateByConfiguration()
   console.log("Finish to get data from local storage");
+
+  document.getElementById('critical-impact-protections').click();
   removeLoader()
 }
 
@@ -337,10 +340,6 @@ function initParameters() {
     // Mark this item as having an event listener attached
     item.dataset.listenerAdded = "true";
   });
-
-
-  // Set the default active header
-  document.getElementById('critical-impact-protections').click();
 
 }
 
