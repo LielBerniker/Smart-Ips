@@ -320,9 +320,35 @@ function initParameters() {
         // Add the active class to the clicked h1 element
         item.classList.add('active');
 
+        const tableContainer = document.querySelector('.protection-table-wrapper');
+        tableContainer.innerHTML = ''; // Clear existing table
+
+        // Create the table and its content dynamically
+        const table = document.createElement('table');
+        table.className = 'protection-table';
+
+        const colgroup = document.createElement('colgroup');
+        colgroup.innerHTML = `
+            <col style="width: 50%;">
+            <col style="width: 25%;">
+            <col style="width: 25%;">
+        `;
+        table.appendChild(colgroup);
+
+        const thead = document.createElement('thead');
+        thead.innerHTML = `
+            <tr>
+                <th class="protection-table-th">Name</th>
+                <th class="protection-table-th">Date</th>
+                <th class="protection-table-th">Status</th>
+            </tr>
+        `;
+        table.appendChild(thead);
+
+        const tbody = document.createElement('tbody');
+        tbody.className = 'protection-table-tbody';
+
         tableInformationList = (item.textContent === 'Critical Impact Protections') ? window.currentGatewayInfo.protections : window.currentGatewayInfo.history;
-        const tbody = document.querySelector('.protection-table-tbody');
-        tbody.innerHTML = ''; // Clear existing rows
         tableInformationList.forEach(row => {
             const tr = document.createElement('tr');
             tdClassStatus = "protection-table-td-status-"
