@@ -364,6 +364,8 @@ function initParameters() {
                             <td class="${tdClassStatus}">${row.status}</td>`;
             tbody.appendChild(tr);
         });
+        table.appendChild(tbody);
+        tableContainer.appendChild(table);
     });
     // Mark this item as having an event listener attached
     item.dataset.listenerAdded = "true";
