@@ -316,7 +316,7 @@ function createItemsForTimeLine() {
         }
         timelineMap.set(dateKey, dataKeySet);
       }
-      prevDate = dataKey;
+      prevDate = dateKey;
     }
 
     let currentData = timelineMap.get(dateKey);
