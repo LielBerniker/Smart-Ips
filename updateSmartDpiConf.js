@@ -309,7 +309,7 @@ function createItemsForTimeLine() {
     console.log("curent datekey")
     console.log(dateKey)
     console.log("prev datekey")
-    console.log(prevdata)
+    console.log(prevData)
 
     if (dateKey !== prevDate){
       console.log("new date")
