@@ -6,6 +6,7 @@ class ProtectionInformation {
   }  
 }
 
+
 class GatewayConfigInfo {
     constructor(isEnabled, mode, threshold) {
         this.isEnabled = isEnabled;
@@ -261,6 +262,225 @@ function readFromLocalStorge(parsedSmartDpiInformation) {
   removeLoader()
 }
 
+function handleTableContent(event) {
+  const tableContainer = document.querySelector('.protection-table-wrapper');
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// Function to extract the date in 'YYYY-MM-DD' format from the given date string
+function convertDateFormat(dateStr) {
+  const months = {
+      Jan: '01', Feb: '02', Mar: '03', Apr: '04', May: '05', Jun: '06',
+      Jul: '07', Aug: '08', Sep: '09', Oct: '10', Nov: '11', Dec: '12'
+  };
+  const [day, month, year] = dateStr.split(' ').slice(0, 3);
+  return `20${year}-${months[month]}-${day.padStart(2, '0')}`;
+}
+
+function createItemsForTimeLine() {
+  const timelineMap = new Map();
+  prevDate = ""
+  timelineMap.set(prevDate,  new Set())
+  window.currentGatewayInfo.history.forEach(logInfo => {
+    const dateKey = convertDateFormat(logInfo.date);
+
+    if (dateKey !== prevDate){
+      let dataKeySet = new Set();
+      let prevTimelineInfo = timelineMap.get(prevDate);
+      if (prevTimelineInfo) {
+        for (let protectionInfo of prevTimelineInfo) {
+          dataKeySet.add(protectionInfo)
+        }
+        timelineMap.set(dateKey, dataKeySet);
+      }
+      prevDate = dataKey;
+    }
+
+    let currentData = timelineMap.get(dateKey);
+
+    if (logInfo.status === disabledStr){
+      if (!currentData.has(logInfo.name)){
+        currentData.add(logInfo.name);
+      } 
+    } else if (logInfo.status === enabledStr) {
+      if (currentData.has(logInfo.name)){
+        currentData.delete(logInfo.name);
+      } 
+    }
+  });
+
+  const items = [];
+  let idCounter = 1; // Initialize a counter for unique IDs
+
+  timelineMap.forEach((protectionsSet, dateKey) => {
+    // Convert the set to an array and create the info array
+    const infoArray = Array.from(protectionsSet);
+
+    // Create the item object
+    const item = {
+        id: idCounter++,
+        content: infoArray.length,
+        start: dateKey,
+        info: infoArray
+    };
+
+    // Add the item object to the items array
+    items.push(item);
+    idCounter++; // Increment the counter after pushing the item
+  });
+  return items;
+}
+
+
+function createTableContent(tableType){
+    const tableContainer = document.querySelector('.protection-table-wrapper');
+    tableContainer.innerHTML = ''; // Clear existing table
+
+    // Create the table and its content dynamically
+    const table = document.createElement('table');
+    table.className = 'protection-table';
+
+    const colgroup = document.createElement('colgroup');
+    colgroup.innerHTML = `
+        <col style="width: 50%;">
+        <col style="width: 25%;">
+        <col style="width: 25%;">
+    `;
+    table.appendChild(colgroup);
+
+    const thead = document.createElement('thead');
+    thead.innerHTML = `
+        <tr>
+            <th class="protection-table-th">Name</th>
+            <th class="protection-table-th">Date</th>
+            <th class="protection-table-th">Status</th>
+        </tr>
+    `;
+    table.appendChild(thead);
+
+    const tbody = document.createElement('tbody');
+    tbody.className = 'protection-table-tbody';
+
+    tableInformationList = (tableType === 'Critical Impact Protections') ? window.currentGatewayInfo.protections : window.currentGatewayInfo.history;
+    tableInformationList.forEach(row => {
+        const tr = document.createElement('tr');
+        tdClassStatus = "protection-table-td-status-"
+        if (row.status === modeUpdate || row.status === stateUpdate) {
+          tdClassStatus += "Update";
+        } else {
+          tdClassStatus += row.status;
+        }
+        console.log(row.name);
+        console.log(row.status);
+        tr.innerHTML = `<td class="protection-table-td">${row.name}</td>
+                        <td class="protection-table-td">${row.date}</td>
+                        <td class="${tdClassStatus}">${row.status}</td>`;
+        tbody.appendChild(tr);
+    });
+    table.appendChild(tbody);
+    tableContainer.appendChild(table);
+}
+
+function createTimeLine(){
+  const tableContainer = document.querySelector('.protection-table-wrapper');
+  tableContainer.innerHTML = ''; // Clear existing table
+
+  // Add the new HTML content
+  protectionTableWrapper.innerHTML = `
+    <div id="visualization"></div>
+    <div id="overlay"></div>
+    <div id="modal">
+        <div id="item-details"></div>
+        <button onclick="closeModal()">OK</button>
+    </div>
+    <button id="myButton1">Click Me 1</button>
+    <button id="myButton2">Click Me 2</button>
+    <div id="content"></div>
+    `;
+  
+  var items = createItemsForTimeLine();
+  // Configuration for the Timeline
+  var options = {
+    width: '100%',
+    height: '400px',
+    editable: true,
+    margin: {
+        item: 10,
+        axis: 5
+    },
+    orientation: 'bottom'
+  };
+
+  // Create a Timeline
+  var container = document.getElementById('visualization');
+  var timeline = new vis.Timeline(container, items, options);
+
+  // Add an event listener for the click event
+  timeline.on('click', function (properties) {
+    if (properties.item) {
+        var item = items.get(properties.item);
+        var details = `
+            <p><strong>ID:</strong> ${item.id}</p>
+            <p><strong>Content:</strong> ${item.content}</p>
+            <p><strong>Start:</strong> ${item.start}</p>
+            <p><strong>Info:</strong> ${item.info.join(', ')}</p>
+        `;
+        document.getElementById('item-details').innerHTML = details;
+        document.getElementById('modal').style.display = 'block';
+        document.getElementById('overlay').style.display = 'block';
+    }
+  });
+
+  // Function to close the modal
+  window.closeModal = function () {
+    document.getElementById('modal').style.display = 'none';
+    document.getElementById('overlay').style.display = 'none';
+  }
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 function initParameters() {
  
 
@@ -320,52 +540,13 @@ function initParameters() {
         // Add the active class to the clicked h1 element
         item.classList.add('active');
 
-        const tableContainer = document.querySelector('.protection-table-wrapper');
-        tableContainer.innerHTML = ''; // Clear existing table
+        if (item.textContent == 'Timeline'){
+          createTimeLine();
+        } else{
+          createTableContent(item.textContent)
+        }
 
-        // Create the table and its content dynamically
-        const table = document.createElement('table');
-        table.className = 'protection-table';
 
-        const colgroup = document.createElement('colgroup');
-        colgroup.innerHTML = `
-            <col style="width: 50%;">
-            <col style="width: 25%;">
-            <col style="width: 25%;">
-        `;
-        table.appendChild(colgroup);
-
-        const thead = document.createElement('thead');
-        thead.innerHTML = `
-            <tr>
-                <th class="protection-table-th">Name</th>
-                <th class="protection-table-th">Date</th>
-                <th class="protection-table-th">Status</th>
-            </tr>
-        `;
-        table.appendChild(thead);
-
-        const tbody = document.createElement('tbody');
-        tbody.className = 'protection-table-tbody';
-
-        tableInformationList = (item.textContent === 'Critical Impact Protections') ? window.currentGatewayInfo.protections : window.currentGatewayInfo.history;
-        tableInformationList.forEach(row => {
-            const tr = document.createElement('tr');
-            tdClassStatus = "protection-table-td-status-"
-            if (row.status === modeUpdate || row.status === stateUpdate) {
-              tdClassStatus += "Update";
-            } else {
-              tdClassStatus += row.status;
-            }
-            console.log(row.name);
-            console.log(row.status);
-            tr.innerHTML = `<td class="protection-table-td">${row.name}</td>
-                            <td class="protection-table-td">${row.date}</td>
-                            <td class="${tdClassStatus}">${row.status}</td>`;
-            tbody.appendChild(tr);
-        });
-        table.appendChild(tbody);
-        tableContainer.appendChild(table);
     });
     // Mark this item as having an event listener attached
     item.dataset.listenerAdded = "true";
