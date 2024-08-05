@@ -406,7 +406,6 @@ function createTableContent(tableType){
 
 function createTimeLine(){
   const protectionTableWrapper = document.querySelector('.protection-table-wrapper');
-  protectionTableWrapper.innerHTML = ''; // Clear existing table
 
   // Add the new HTML content
   protectionTableWrapper.innerHTML = `
