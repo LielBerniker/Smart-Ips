@@ -415,8 +415,6 @@ function createTimeLine(){
         <div id="item-details"></div>
         <button onclick="closeModal()">OK</button>
     </div>
-    <button id="myButton1">Click Me 1</button>
-    <button id="myButton2">Click Me 2</button>
     <div id="content"></div>
     `;
   
