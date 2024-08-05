@@ -341,8 +341,8 @@ function createItemsForTimeLine() {
 
     // Create the item object
     const item = {
-        id: idCounter++,
-        content: infoArray.length,
+        id: idCounter,
+        content: String(infoArray.length),
         start: dateKey,
         info: infoArray
     };
