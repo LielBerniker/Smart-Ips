@@ -306,19 +306,19 @@ function createItemsForTimeLine() {
   timelineMap.set(prevDate,  new Set())
   window.currentGatewayInfo.history.forEach(logInfo => {
     const dateKey = convertDateFormat(logInfo.date);
-    console.log("curent datekey")
-    console.log(dateKey)
-    console.log("prev datekey")
-    console.log(prevData)
+    console.log("curent datekey");
+    console.log(dateKey);
+    console.log("prev datekey");
+    console.log(prevDate);
 
     if (dateKey !== prevDate){
-      console.log("new date")
+      console.log("new date");
       let dataKeySet = new Set();
       let prevTimelineInfo = timelineMap.get(prevDate);
       if (prevTimelineInfo) {
-        console.log("there is prev time")
+        console.log("there is prev date")
         for (let protectionInfo of prevTimelineInfo) {
-          dataKeySet.add(protectionInfo)
+          dataKeySet.add(protectionInfo);
         }
         timelineMap.set(dateKey, dataKeySet);
       }
@@ -337,6 +337,7 @@ function createItemsForTimeLine() {
       } 
     }
   });
+  timelineMap.delete("");
 
   const items = [];
   let idCounter = 1; // Initialize a counter for unique IDs
