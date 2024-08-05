@@ -306,11 +306,17 @@ function createItemsForTimeLine() {
   timelineMap.set(prevDate,  new Set())
   window.currentGatewayInfo.history.forEach(logInfo => {
     const dateKey = convertDateFormat(logInfo.date);
+    console.log("curent datekey")
+    console.log(dateKey)
+    console.log("prev datekey")
+    console.log(prevdata)
 
     if (dateKey !== prevDate){
+      console.log("new date")
       let dataKeySet = new Set();
       let prevTimelineInfo = timelineMap.get(prevDate);
       if (prevTimelineInfo) {
+        console.log("there is prev time")
         for (let protectionInfo of prevTimelineInfo) {
           dataKeySet.add(protectionInfo)
         }
@@ -337,6 +343,8 @@ function createItemsForTimeLine() {
 
   timelineMap.forEach((protectionsSet, dateKey) => {
     // Convert the set to an array and create the info array
+    console.log("curent datekey")
+    console.log(dateKey)
     const infoArray = Array.from(protectionsSet);
 
     // Create the item object
