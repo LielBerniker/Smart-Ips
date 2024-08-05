@@ -27,6 +27,7 @@
   ],
   "requested-permissions": {
     "client": ["get-read-only-session", "run-read-only-commands"],
-    "pre-approved-commands": ["run-script"]
+    "pre-approved-commands": ["run-script"],
+    "resource-urls": ["https://cdnjs.cloudflare.com/ajax/libs/vis/4.21.0/"]
   }
 }

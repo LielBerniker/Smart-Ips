@@ -403,6 +403,7 @@ function createTableContent(tableType){
 }
 
 function createTimeLine(){
+  
   const protectionTableWrapper = document.querySelector('.protection-table-wrapper');
   console.log('in create timeline');
   // Add the new HTML content
