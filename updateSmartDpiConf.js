@@ -393,8 +393,6 @@ function createTableContent(tableType){
         } else {
           tdClassStatus += row.status;
         }
-        console.log(row.name);
-        console.log(row.status);
         tr.innerHTML = `<td class="protection-table-td">${row.name}</td>
                         <td class="protection-table-td">${row.date}</td>
                         <td class="${tdClassStatus}">${row.status}</td>`;
@@ -406,7 +404,7 @@ function createTableContent(tableType){
 
 function createTimeLine(){
   const protectionTableWrapper = document.querySelector('.protection-table-wrapper');
-
+  console.log('in create timeline');
   // Add the new HTML content
   protectionTableWrapper.innerHTML = `
     <div id="visualization"></div>
