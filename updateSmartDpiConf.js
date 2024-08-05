@@ -303,7 +303,7 @@ function convertDateFormat(dateStr) {
 function createItemsForTimeLine() {
   const timelineMap = new Map();
   prevDate = ""
-  timelineMap.set(prevDate,  new Set())
+  let protectionsSet = new Set();
   window.currentGatewayInfo.history.forEach(logInfo => {
     const dateKey = convertDateFormat(logInfo.date);
     console.log("curent datekey");
@@ -314,14 +314,7 @@ function createItemsForTimeLine() {
     if (dateKey !== prevDate){
       console.log("new date");
       let dataKeySet = new Set();
-      let prevTimelineInfo = timelineMap.get(prevDate);
-      if (prevTimelineInfo) {
-        console.log("there is prev date")
-        for (let protectionInfo of prevTimelineInfo) {
-          dataKeySet.add(protectionInfo);
-        }
-        timelineMap.set(dateKey, dataKeySet);
-      }
+      timelineMap.set(dateKey, dataKeySet);
       prevDate = dateKey;
     }
 
@@ -330,17 +323,19 @@ function createItemsForTimeLine() {
     if (logInfo.status === disabledStr){
       if (!currentData.has(logInfo.name)){
         currentData.add(logInfo.name);
+        protectionsSet.add(logInfo.name)
       } 
     } else if (logInfo.status === enabledStr) {
       if (currentData.has(logInfo.name)){
-        currentData.delete(logInfo.name);
+        protectionsSet.delete(logInfo.name);
       } 
     }
   });
-  timelineMap.delete("");
 
   const items = [];
   let idCounter = 1; // Initialize a counter for unique IDs
+
+  console.log("Size of timelineMap:", timelineMap.size);
 
   timelineMap.forEach((protectionsSet, dateKey) => {
     // Convert the set to an array and create the info array
