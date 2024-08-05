@@ -418,7 +418,7 @@ function createTimeLine(){
     <div id="content"></div>
     `;
   
-  var items = createItemsForTimeLine();
+  var items = new vis.DataSet(createItemsForTimeLine());
   // Configuration for the Timeline
   var options = {
     width: '100%',
