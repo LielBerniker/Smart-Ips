@@ -405,8 +405,8 @@ function createTableContent(tableType){
 }
 
 function createTimeLine(){
-  const tableContainer = document.querySelector('.protection-table-wrapper');
-  tableContainer.innerHTML = ''; // Clear existing table
+  const protectionTableWrapper = document.querySelector('.protection-table-wrapper');
+  protectionTableWrapper.innerHTML = ''; // Clear existing table
 
   // Add the new HTML content
   protectionTableWrapper.innerHTML = `
