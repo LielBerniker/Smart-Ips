@@ -288,6 +288,8 @@ function handleTableContent(event) {
 
 
 
+
+
 function showLoading() {
   document.getElementById('loading-div').classList.remove('hidden');
 }
