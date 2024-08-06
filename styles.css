@@ -238,3 +238,8 @@ button:hover {
   padding: 5px 10px;
   font-size: 16px;
 }
+
+.custom-item {
+  background-color: red !important;
+  color: white;
+}

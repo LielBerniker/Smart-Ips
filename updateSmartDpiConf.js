@@ -348,7 +348,8 @@ function createItemsForTimeLine() {
         id: idCounter,
         content: String(infoArray.length),
         start: dateKey,
-        info: infoArray
+        info: infoArray,
+        className: 'custom-item' 
     };
 
     // Add the item object to the items array
@@ -426,7 +427,12 @@ function createTimeLine(){
   var options = {
     width: '100%',
     height: '230px',
-    editable: true,
+    editable: {
+      add: false,         
+      remove: false,     
+      updateTime: true,   
+      updateGroup: true   
+    },
     margin: {
         item: 10,
         axis: 5
