@@ -437,8 +437,10 @@ function createTimeLine(){
     `;
   
   var items = new vis.DataSet(createItemsForTimeLine());
-  var today = new Date();
-  var formattedDate = formatDate(today);
+  var currentDate = new Date();
+  // edit the current date to have the date of tomorrow
+  currentDate.setDate(currentDate.getDate() + 1);
+  var formattedDate = formatDate(currentDate);
   // Configuration for the Timeline
   var options = {
     width: '100%',
@@ -454,7 +456,8 @@ function createTimeLine(){
         axis: 5
     },
     orientation: 'bottom',
-    end: formattedDate
+    end: formattedDate, // show tommorow as the most right in the timeline
+    zoomMin: 1000 * 60 * 60 * 24, // One day in milliseconds
   };
 
   // Create a Timeline
