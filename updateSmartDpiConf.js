@@ -470,7 +470,7 @@ function createTimeLine(){
     if (properties.item) {
         var item = items.get(properties.item);
         var details = `
-            <p><strong>Disabled Protections</strong></p>
+            <p class="items-header"><strong>Disabled Protections</strong></p>
             <ul class="items-list">${item.info.map(info => `<li>${info}</li>`).join('')}</ul>
         `;
         document.getElementById('item-details').innerHTML = details;

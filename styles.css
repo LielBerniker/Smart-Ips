@@ -285,3 +285,11 @@ button:hover {
 .items-list li {
   padding-left: 10px; /* Optional: add padding to align text */
 }
+
+.items-header {
+  text-align: center;
+  background-color: #2e3f58; /* Dark blue background */
+  color: white; /* White text color */
+  padding: 10px; /* Padding for better appearance */
+  box-sizing: border-box; /* Include padding in width calculation */
+}
