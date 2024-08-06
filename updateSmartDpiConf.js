@@ -289,11 +289,11 @@ function handleTableContent(event) {
 
 
 function showLoading() {
-  document.getElementById('loading').classList.remove('hidden');
+  document.getElementById('loading-div').classList.remove('hidden');
 }
 
 function hideLoading() {
-  document.getElementById('loading').classList.add('hidden');
+  document.getElementById('loading-div').classList.add('hidden');
 }
 
 // Function to extract the date in 'YYYY-MM-DD' format from the given date string
