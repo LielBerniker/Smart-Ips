@@ -277,7 +277,8 @@ button:hover {
 
 .items-list li {
   padding-left: 10px; /* Optional: add padding to align text */
-  padding-top: 2px; /* Optional: add padding to align text */
+  padding-right: 10px; /* Optional: add padding to align text */
+  padding-top: 3px; /* Optional: add padding to align text */
 }
 
 .items-header {
@@ -291,5 +292,18 @@ button:hover {
 }
 
 .close-modal {
-  padding: 10px;
+  display: block;
+  margin: 20px auto; /* Centers the button horizontally */
+  padding: 5px 10px;
+  font-size: 16px;
+}
+
+.vis-item.vis-box {
+  border-radius: 50%;
+  background-color: white;
+  border: 5px solid red;
+  text-align: center;
+  line-height: 1.5em; /* Adjust as needed to center the text vertically */
+  padding: 10px; /* Adjust padding to make the circle larger */
+  box-sizing: border-box; /* Ensure padding and border are included in the element's total width and height */
 }

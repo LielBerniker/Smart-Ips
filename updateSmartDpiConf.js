@@ -431,7 +431,7 @@ function createTimeLine(){
     <div id="overlay"></div>
     <div id="item-modal">
         <div id="item-details"></div>
-        <button class=="close-modal" onclick="closeModal()">OK</button>
+        <button class="close-modal" onclick="closeModal()">OK</button>
     </div>
     <div id="content"></div>
     `;
@@ -457,7 +457,7 @@ function createTimeLine(){
     },
     orientation: 'bottom',
     end: formattedDate, // show tommorow as the most right in the timeline
-    zoomMin: 1000 * 60 * 60 , // One day in milliseconds
+    zoomMin: 1000 * 60 * 60 * 24, // One day in milliseconds
   };
 
   // Create a Timeline
