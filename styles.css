@@ -274,7 +274,8 @@ button:hover {
 }
 
 .items-list li {
-  padding: 10px; /* Optional: add padding to align text */
+  padding-left: 10px; /* Optional: add padding to align text */
+  padding-top: 2px; /* Optional: add padding to align text */
 }
 
 .items-header {
