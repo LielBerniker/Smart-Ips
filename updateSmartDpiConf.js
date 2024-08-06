@@ -440,8 +440,8 @@ function createTimeLine(){
     editable: {
       add: false,         
       remove: false,     
-      updateTime: true,   
-      updateGroup: true   
+      updateTime: false,   
+      updateGroup: false   
     },
     margin: {
         item: 10,
