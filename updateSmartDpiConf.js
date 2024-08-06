@@ -425,7 +425,7 @@ function createTimeLine(){
   // Configuration for the Timeline
   var options = {
     width: '100%',
-    height: '400px',
+    height: '230px',
     editable: true,
     margin: {
         item: 10,
