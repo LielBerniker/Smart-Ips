@@ -457,7 +457,7 @@ function createTimeLine(){
     },
     orientation: 'bottom',
     end: formattedDate, // show tommorow as the most right in the timeline
-    zoomMin: 1000 * 60 * 60 * 24 * 6, // One day in milliseconds
+    zoomMin: 1000 * 60 * 60 * 24 * 3, // One day in milliseconds
   };
 
   // Create a Timeline
