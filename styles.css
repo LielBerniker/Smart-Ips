@@ -59,7 +59,7 @@ body {
 /* Add hover effect */
 .header-container h1:hover {
   background-color: #4b5a7c; /* Slightly lighter blue background on hover */
-  color: black; /* Change text color on hover if needed */
+  color: #6c7b9e; /* Change text color on hover if needed */
 }
 
 .header-container h1.active {
