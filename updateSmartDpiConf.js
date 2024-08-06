@@ -464,10 +464,8 @@ function createTimeLine(){
     if (properties.item) {
         var item = items.get(properties.item);
         var details = `
-            <p><strong>ID:</strong> ${item.id}</p>
-            <p><strong>Content:</strong> ${item.content}</p>
-            <p><strong>Start:</strong> ${item.start}</p>
-            <p><strong>Info:</strong> ${item.info.join(', ')}</p>
+            <p><strong>ID:</strong> "Disabled Protections"</p>
+            <ul>${item.info.map(info => `<li>${info}</li>`).join('')}</ul>
         `;
         document.getElementById('item-details').innerHTML = details;
         document.getElementById('modal').style.display = 'block';

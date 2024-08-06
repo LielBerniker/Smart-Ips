@@ -260,3 +260,9 @@ button:hover {
 .hidden {
   display: none;
 }
+
+#item-details {
+  border: 3px solid #2e3f58;
+  padding: 10px;
+  margin-top: 10px;
+}
