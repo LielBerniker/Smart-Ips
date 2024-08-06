@@ -435,7 +435,7 @@ function createTimeLine(){
   var items = new vis.DataSet(createItemsForTimeLine());
   // Configuration for the Timeline
   var options = {
-    width: '100%',
+    width: '90%',
     height: '200px',
     editable: {
       add: false,         
