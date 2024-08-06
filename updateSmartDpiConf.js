@@ -431,7 +431,7 @@ function createTimeLine(){
     <div id="overlay"></div>
     <div id="item-modal">
         <div id="item-details"></div>
-        <button onclick="closeModal()">OK</button>
+        <button class=="close-modal" onclick="closeModal()">OK</button>
     </div>
     <div id="content"></div>
     `;

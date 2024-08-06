@@ -274,7 +274,7 @@ button:hover {
 }
 
 .items-list li {
-  padding-left: 10px; /* Optional: add padding to align text */
+  padding: 10px; /* Optional: add padding to align text */
 }
 
 .items-header {
@@ -284,4 +284,9 @@ button:hover {
   margin-top: 0; /* Remove the top margin */
   padding-top: 0; /* Remove the top padding */
   box-sizing: border-box; /* Include padding in width calculation */
+  padding: 10px;
+}
+
+.close-modal {
+  padding: 10px;
 }
