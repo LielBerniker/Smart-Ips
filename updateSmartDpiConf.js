@@ -417,7 +417,6 @@ function createTableContent(tableType){
 }
 
 function createTimeLine(){
-  showLoading();
   
   const protectionTableWrapper = document.querySelector('.protection-table-wrapper');
   console.log('in create timeline');
@@ -474,9 +473,9 @@ function createTimeLine(){
   });
 
   // Hide the loading icon after the timeline is created
-  timeline.on('currentTimeTick', function() {
-    hideLoading();
-  });
+  // timeline.on('currentTimeTick', function() {
+  //   hideLoading();
+  // });
 
 
   // Function to close the modal
@@ -564,13 +563,13 @@ function initParameters() {
         console.log(item.textContent);
         // Add the active class to the clicked h1 element
         item.classList.add('active');
-
+        showLoading();
         if (item.textContent == 'Timeline'){
           createTimeLine();
         } else{
           createTableContent(item.textContent)
         }
-
+        hideLoading();
 
     });
     // Mark this item as having an event listener attached
