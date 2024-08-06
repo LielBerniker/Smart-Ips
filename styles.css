@@ -66,8 +66,8 @@ body {
   border-top: 2px solid white; /* White border on top when active */
   border-left: 2px solid white; /* White border on the left when active */
   border-right: 2px solid white; /* White border on the right when active */
-  border-top-left-radius: 4px; /* Curve the top left corner */
-  border-top-right-radius: 4px; /* Curve the top right corner */
+  border-top-left-radius: 10px; /* Curve the top left corner */
+  border-top-right-radius: 10px; /* Curve the top right corner */
   background-color: #4b5a7c; /* Slightly lighter background color when active */
 }
 
