@@ -74,7 +74,7 @@ function updateByConfiguration() {
 function onCommitfetchLocal(value) {
   if (Array.isArray(value) && value.length > 0) {
     var firstItem = value[0];
-    console.log("Finish to run fw fetch local");
+    console.log("Finish to run fw amw fetch local");
     document.querySelector('button[type="submit"]').disabled = false;
   }
 }
@@ -90,8 +90,8 @@ function needNewGWreport(currentTime, storedTime) {
 
 function runLocalFetchOnGW() {
 
-  const fetchLocalCli = "fw fetch local"
-  const mgmtCli = `run-script script-name "fw_fetch_local" script "${fetchLocalCli}" targets.1 "${window.gatewayName}" --format json`;
+  const fetchLocalCli = "fw amw fetch local"
+  const mgmtCli = `run-script script-name "fw_amw_fetch_local" script "${fetchLocalCli}" targets.1 "${window.gatewayName}" --format json`;
   //request to commit changes
   smxProxy.sendRequest("request-commit", {"commands" : [mgmtCli]}, "onCommitfetchLocal");
 }
