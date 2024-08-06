@@ -232,6 +232,9 @@ button:hover {
   padding: 20px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
   z-index: 1000;
+  border: 3px solid #2e3f58;
+  padding: 0;
+  margin-top: 0;
 }
 #overlay {
   display: none;
@@ -242,11 +245,6 @@ button:hover {
   height: 100%;
   background-color: rgba(0, 0, 0, 0.5);
   z-index: 999;
-}
-#item-modal button {
-  margin-top: 10px;
-  padding: 5px 10px;
-  font-size: 16px;
 }
 
 .custom-item {
@@ -269,12 +267,6 @@ button:hover {
 }
 .hidden {
   display: none;
-}
-
-#item-modal {
-  border: 3px solid #2e3f58;
-  padding: 10px;
-  margin-top: 10px;
 }
 
 .items-list {
