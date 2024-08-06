@@ -56,9 +56,19 @@ body {
   cursor: pointer; /* Cursor changes to pointer */
 }
 
+/* Add hover effect */
+.header-container h1:hover {
+  background-color: #4b5a7c; /* Slightly lighter blue background on hover */
+  color: black; /* Change text color on hover if needed */
+}
+
 .header-container h1.active {
-  border: 2px solid black; /* Black border when active */
-  background-color: #3a4a6b; /* Slightly lighter background color when active */
+  border-top: 2px solid white; /* White border on top when active */
+  border-left: 2px solid white; /* White border on the left when active */
+  border-right: 2px solid white; /* White border on the right when active */
+  border-top-left-radius: 4px; /* Curve the top left corner */
+  border-top-right-radius: 4px; /* Curve the top right corner */
+  background-color: #4b5a7c; /* Slightly lighter background color when active */
 }
 
 .protection-table-wrapper {
