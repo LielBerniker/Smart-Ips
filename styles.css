@@ -271,6 +271,8 @@ button:hover {
 .items-list {
   list-style-type: none;
   padding: 0;
+  max-height: 300px;
+  overflow-y: auto;
 }
 
 .items-list li {
