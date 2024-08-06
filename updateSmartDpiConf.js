@@ -288,7 +288,13 @@ function handleTableContent(event) {
 
 
 
+function showLoading() {
+  document.getElementById('loading').classList.remove('hidden');
+}
 
+function hideLoading() {
+  document.getElementById('loading').classList.add('hidden');
+}
 
 // Function to extract the date in 'YYYY-MM-DD' format from the given date string
 function convertDateFormat(dateStr) {
@@ -342,19 +348,20 @@ function createItemsForTimeLine() {
     console.log("curent datekey")
     console.log(dateKey)
     const infoArray = Array.from(protectionsSet);
+    if (infoArray.length > 0){
+        // Create the item object
+        const item = {
+          id: idCounter,
+          content: String(infoArray.length),
+          start: dateKey,
+          info: infoArray,
+          className: 'custom-item' 
+        };
 
-    // Create the item object
-    const item = {
-        id: idCounter,
-        content: String(infoArray.length),
-        start: dateKey,
-        info: infoArray,
-        className: 'custom-item' 
-    };
-
-    // Add the item object to the items array
-    items.push(item);
-    idCounter++; // Increment the counter after pushing the item
+      // Add the item object to the items array
+      items.push(item);
+      idCounter++; // Increment the counter after pushing the item
+    }
   });
   return items;
 }
@@ -408,6 +415,7 @@ function createTableContent(tableType){
 }
 
 function createTimeLine(){
+  showLoading();
   
   const protectionTableWrapper = document.querySelector('.protection-table-wrapper');
   console.log('in create timeline');
@@ -426,7 +434,7 @@ function createTimeLine(){
   // Configuration for the Timeline
   var options = {
     width: '100%',
-    height: '230px',
+    height: '200px',
     editable: {
       add: false,         
       remove: false,     
@@ -459,6 +467,12 @@ function createTimeLine(){
         document.getElementById('overlay').style.display = 'block';
     }
   });
+
+  // Hide the loading icon after the timeline is created
+  timeline.on('currentTimeTick', function() {
+    hideLoading();
+  });
+
 
   // Function to close the modal
   window.closeModal = function () {
