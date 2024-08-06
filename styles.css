@@ -212,7 +212,7 @@ button:hover {
   height: 400px;
   border: 1px solid lightgray;
 }
-#modal {
+#item-modal {
   display: none;
   position: fixed;
   top: 50%;
@@ -233,7 +233,7 @@ button:hover {
   background-color: rgba(0, 0, 0, 0.5);
   z-index: 999;
 }
-#modal button {
+#item-modal button {
   margin-top: 10px;
   padding: 5px 10px;
   font-size: 16px;

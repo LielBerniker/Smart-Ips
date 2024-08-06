@@ -424,7 +424,7 @@ function createTimeLine(){
   protectionTableWrapper.innerHTML = `
     <div id="visualization"></div>
     <div id="overlay"></div>
-    <div id="modal">
+    <div id="item-modal">
         <div id="item-details"></div>
         <button onclick="closeModal()">OK</button>
     </div>
@@ -459,11 +459,11 @@ function createTimeLine(){
     if (properties.item) {
         var item = items.get(properties.item);
         var details = `
-            <p><strong>ID:</strong> "Disabled Protections"</p>
+            <p><strong>Disabled Protections</strong></p>
             <ul>${item.info.map(info => `<li>${info}</li>`).join('')}</ul>
         `;
         document.getElementById('item-details').innerHTML = details;
-        document.getElementById('modal').style.display = 'block';
+        document.getElementById('item-modal').style.display = 'block';
         document.getElementById('overlay').style.display = 'block';
     }
   });
@@ -476,7 +476,7 @@ function createTimeLine(){
 
   // Function to close the modal
   window.closeModal = function () {
-    document.getElementById('modal').style.display = 'none';
+    document.getElementById('item-modal').style.display = 'none';
     document.getElementById('overlay').style.display = 'none';
   }
 
