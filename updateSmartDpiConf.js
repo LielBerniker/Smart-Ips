@@ -458,9 +458,6 @@ function createTimeLine(){
     orientation: 'bottom',
     end: formattedDate, // show tommorow as the most right in the timeline
     zoomMin: 1000 * 60 * 60 * 24, // One day in milliseconds
-    moment: function(date) {
-      return vis.moment(date).format('YYYY-MM-DD');
-    }
   };
 
   // Create a Timeline
