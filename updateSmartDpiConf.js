@@ -433,6 +433,10 @@ function createTimeLine(){
     `;
   
   var items = new vis.DataSet(createItemsForTimeLine());
+
+  // Get today's date
+  var today = new Date();
+  var startOfDay = new Date(today.setHours(0, 0, 0, 0));
   // Configuration for the Timeline
   var options = {
     width: '100%',
@@ -447,7 +451,8 @@ function createTimeLine(){
         item: 10,
         axis: 5
     },
-    orientation: 'bottom'
+    orientation: 'bottom',
+    start: startOfDay, // Set the initial start date to today
   };
 
   // Create a Timeline
