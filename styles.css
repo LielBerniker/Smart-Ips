@@ -249,11 +249,17 @@ button:hover {
 .vis-item.vis-box.custom-item {
   border-radius: 50%;
   background-color: white;
-  border: 5px solid red;
+  border: 2px solid red; /* Reduce the border width */
   text-align: center;
-  line-height: 1.5em; /* Adjust as needed to center the text vertically */
-  padding: 10px; /* Adjust padding to make the circle larger */
+  font-weight: bold; /* Make the text bold */
+  line-height: 1; /* Adjust as needed to center the text vertically */
+  padding: 0; /* Remove padding */
   box-sizing: border-box; /* Ensure padding and border are included in the element's total width and height */
+  width: 30px; /* Set a fixed width for the circle */
+  height: 30px; /* Set a fixed height for the circle */
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .loader {
@@ -298,7 +304,7 @@ button:hover {
 
 .close-modal {
   display: block;
-  margin: 20px auto; /* Centers the button horizontally */
+  margin: 10px auto; /* Centers the button horizontally */
   padding: 10px 20px;
   font-size: 16px;
 }
