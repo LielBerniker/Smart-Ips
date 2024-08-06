@@ -287,7 +287,12 @@ function handleTableContent(event) {
 
 
 
-
+function formatDate(date) {
+  const year = date.getFullYear().toString().slice(-2); // last two digits of year
+  const month = (date.getMonth() + 1).toString().padStart(2, '0'); // month
+  const day = date.getDate().toString().padStart(2, '0'); // day
+  return `20${year}-${month}-${day}`;
+}
 
 
 function showLoading() {
@@ -432,7 +437,8 @@ function createTimeLine(){
     `;
   
   var items = new vis.DataSet(createItemsForTimeLine());
-
+  var today = new Date();
+  var formattedDate = formatDate(today);
   // Configuration for the Timeline
   var options = {
     width: '100%',
@@ -447,7 +453,8 @@ function createTimeLine(){
         item: 10,
         axis: 5
     },
-    orientation: 'bottom'
+    orientation: 'bottom',
+    end: formattedDate
   };
 
   // Create a Timeline
