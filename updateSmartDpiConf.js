@@ -296,6 +296,8 @@ function getNextDayFormated(date) {
 
 
 function formatDate(date) {
+  console.log("date in formatdate");
+  console.log(date);
   const year = date.getFullYear().toString().slice(-2); // last two digits of year
   const month = (date.getMonth() + 1).toString().padStart(2, '0'); // month
   const day = date.getDate().toString().padStart(2, '0'); // day
