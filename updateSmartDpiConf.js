@@ -361,7 +361,17 @@ function createItemsForTimeLine() {
       } 
     }
   }
-
+  if (protectionsSet.size > 0){
+    var currentDate = new Date();
+    var formatedDate = formatDate(currentDate);
+    while (formatedDate !== prevDate){
+      dayAfterPrev = getNextDayFormated(prevDate)
+      console.log("the next day");
+      console.log(dayAfterPrev);
+      timelineMap.set(dayAfterPrev, new Set(protectionsSet));
+      prevDate = dayAfterPrev;
+    }
+  }
 
   const items = [];
   let idCounter = 1; // Initialize a counter for unique IDs
@@ -458,7 +468,7 @@ function createTimeLine(){
   var currentDate = new Date();
   // edit the current date to have the date of tomorrow
   currentDate.setDate(currentDate.getDate() + 1);
-  var formattedDate = formatDate(currentDate);
+  var formatedDate = formatDate(currentDate);
   // Configuration for the Timeline
   var options = {
     width: '100%',
@@ -474,7 +484,7 @@ function createTimeLine(){
         axis: 5
     },
     orientation: 'bottom',
-    end: formattedDate, // show tommorow as the most right in the timeline
+    end: formatedDate, // show tommorow as the most right in the timeline
     zoomMin: 1000 * 60 * 60 * 24 * 3, // show min zoom of days
   };
 
