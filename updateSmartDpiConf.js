@@ -284,6 +284,14 @@ function handleTableContent(event) {
 
 
 
+function getNextDayFormated(date) {
+  // Convert prevDate to a Date object
+  let prevDateObj = new Date(date);
+  // Add one day to the prevDate
+  prevDateObj.setDate(prevDateObj.getDate() + 1);
+  // Format the new date as 'YYYY-MM-DD'
+  return prevDateObj.toISOString().split('T')[0];
+}
 
 
 
@@ -317,18 +325,18 @@ function createItemsForTimeLine() {
   const timelineMap = new Map();
   prevDate = ""
   let protectionsSet = new Set();
-  window.currentGatewayInfo.history.forEach(logInfo => {
+  for (let i = window.currentGatewayInfo.history.length - 1; i >= 0; i--) {
+    const logInfo = window.currentGatewayInfo.history[i]
     const dateKey = convertDateFormat(logInfo.date);
     console.log("curent datekey");
     console.log(dateKey);
     console.log("prev datekey");
     console.log(prevDate);
 
-    if (dateKey !== prevDate){
-      console.log("new date");
-      let dataKeySet = new Set();
-      timelineMap.set(dateKey, dataKeySet);
-      prevDate = dateKey;
+    while (dateKey !== prevDate) {
+      dayAfterPrev = getNextDayFormated(prevDate)
+      timelineMap.set(dayAfterPrev, new Set(protectionsSet));
+      prevDate = dayAfterPrev;
     }
 
     let currentData = timelineMap.get(dateKey);
@@ -343,7 +351,8 @@ function createItemsForTimeLine() {
         protectionsSet.delete(logInfo.name);
       } 
     }
-  });
+  }
+
 
   const items = [];
   let idCounter = 1; // Initialize a counter for unique IDs
@@ -457,7 +466,7 @@ function createTimeLine(){
     },
     orientation: 'bottom',
     end: formattedDate, // show tommorow as the most right in the timeline
-    zoomMin: 1000 * 60 * 60 * 24 * 3, // One day in milliseconds
+    zoomMin: 1000 * 60 * 60 * 24 * 3, // show min zoom of days
   };
 
   // Create a Timeline
