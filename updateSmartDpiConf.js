@@ -337,6 +337,8 @@ function createItemsForTimeLine() {
 
     while (dateKey !== prevDate) {
       dayAfterPrev = getNextDayFormated(prevDate)
+      console.log("the next day");
+      console.log(dayAfterPrev);
       timelineMap.set(dayAfterPrev, new Set(protectionsSet));
       prevDate = dayAfterPrev;
     }
