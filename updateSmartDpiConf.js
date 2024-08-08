@@ -336,6 +336,7 @@ function createItemsForTimeLine() {
     console.log(prevDate);
 
     if (prevDate === ""){
+      console.log("in first prev")
       timelineMap.set(dateKey, new Set());
       prevDate = dateKey;
     }
@@ -569,6 +570,7 @@ function initParameters() {
     window.currentGatewayInfo.threshold = threshold;
     runUpdateConfigOnGW();
   });
+
 
   document.querySelectorAll('.header-container h1').forEach(item => {
 
