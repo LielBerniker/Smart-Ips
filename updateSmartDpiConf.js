@@ -512,7 +512,7 @@ function createTimeLine(){
   // });
 
 
-  
+
   // Function to close the modal
   window.closeModal = function () {
     document.getElementById('item-modal').style.display = 'none';
@@ -534,9 +534,54 @@ function createTimeLine(){
 
 
 
+function handleSubmitClick(event) {
+  event.preventDefault(); // Prevent form submission
+  event.target.disabled = true; 
+  const thresholdInput = document.getElementById('threshold');
+  const thresholdValue = parseInt(thresholdInput.value, 10);
+
+  if (thresholdValue < 1 || thresholdValue > 100) {
+      alert('Please insert a valid threshold percentage, between 1 to 100.');
+      return;
+  }
+  addLoader();
+  const stateEnabled = document.getElementById('stateToggle').checked;
+  const selectedMode = document.querySelector('input[name="mode"]:checked').value;
+  const threshold = thresholdInput.value;
+
+  window.currentGatewayInfo.isEnabled = stateEnabled ? 1 : 0;
+  window.currentGatewayInfo.mode = selectedMode;
+  window.currentGatewayInfo.threshold = threshold;
+  runUpdateConfigOnGW();
+}
 
 
 
+function handleHeaderClick(item) {
+    if (item.classList.contains('active')) {
+        return; // Do nothing if it's already active
+    }
+
+    // Remove the active class from all h1 elements 
+    document.querySelectorAll('.header-container h1').forEach(h1 => {
+        h1.classList.remove('active');
+    });
+
+    console.log(item.textContent);
+
+    // Add the active class to the clicked h1 element
+    item.classList.add('active');
+
+    showLoading();
+
+    if (item.textContent === 'Timeline') {
+        createTimeLine();
+    } else {
+        createTableContent(item.textContent);
+    }
+
+    hideLoading();
+}
 
 
 
@@ -559,57 +604,6 @@ function initParameters() {
           modeOptions.forEach(option => option.disabled = true);
           monitorOption.checked = true;
       }
-  });
-
-  document.querySelector('button[type="submit"]').addEventListener('click', function(event) {
-    event.preventDefault(); // Prevent form submission
-    event.target.disabled = true; 
-    const thresholdInput = document.getElementById('threshold');
-    const thresholdValue = parseInt(thresholdInput.value, 10);
-
-    if (thresholdValue < 1 || thresholdValue > 100) {
-        alert('Please insert a valid threshold percentage, between 1 to 100.');
-        return;
-    }
-    addLoader();
-    const stateEnabled = document.getElementById('stateToggle').checked;
-    const selectedMode = document.querySelector('input[name="mode"]:checked').value;
-    const threshold = thresholdInput.value;
-
-    window.currentGatewayInfo.isEnabled = stateEnabled ? 1 : 0;
-    window.currentGatewayInfo.mode = selectedMode;
-    window.currentGatewayInfo.threshold = threshold;
-    runUpdateConfigOnGW();
-  });
-
-
-  document.querySelectorAll('.header-container h1').forEach(item => {
-
-    if (item.dataset.listenerAdded) return;
-
-    item.addEventListener('click', event => {
-
-        if (item.classList.contains('active')) {
-          return; // Do nothing if it's already active
-        }
-        // Remove the active class from all h1 elements 
-        document.querySelectorAll('.header-container h1').forEach(h1 => {
-            h1.classList.remove('active');
-        });
-        console.log(item.textContent);
-        // Add the active class to the clicked h1 element
-        item.classList.add('active');
-        showLoading();
-        if (item.textContent == 'Timeline'){
-          createTimeLine();
-        } else{
-          createTableContent(item.textContent)
-        }
-        hideLoading();
-
-    });
-    // Mark this item as having an event listener attached
-    item.dataset.listenerAdded = "true";
   });
 
 }
