@@ -512,6 +512,7 @@ function createTimeLine(){
   // });
 
 
+  
   // Function to close the modal
   window.closeModal = function () {
     document.getElementById('item-modal').style.display = 'none';
