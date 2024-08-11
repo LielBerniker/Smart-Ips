@@ -80,6 +80,28 @@ function getConfigurationData(item) {
   return false;
 }
 
+function isCodeOnGW(item) {
+  try {
+    const jsonString = item.substring(item.indexOf('{'), item.lastIndexOf('}') + 1);
+    const jsonData = JSON.parse(jsonString);
+    if (jsonData.tasks && jsonData.tasks.length > 0) {
+      responseMessage = jsonData.tasks[0]["task-details"][0].responseMessage;
+      const decodedMessage = atob(responseMessage);
+      console.log(decodedMessage)
+      const parsedResponse = JSON.parse(decodedMessage);
+      console.log(parsedResponse)
+      return true;
+    } else {
+      alert('No tasks found in data.');
+      console.log('No tasks found in data.');
+    }
+  } catch (error) {
+    alert("Error parsing JSON(getCongigurationData):" + error);
+    console.log("Error parsing JSON(getCongigurationData):" + error);
+  }
+  return false;
+}
+
 function onCommitUpdate(value) {
   console.log(JSON.stringify(value, null, 2));
   
@@ -249,6 +271,10 @@ if (Array.isArray(value) && value.length > 0) {
   if (!isTaskSucceeded(firstItem)){
     console.log('fail to get report of Smart IPS code in the GW');
     alert('fail to get report of Smart IPS code in the GW');
+  } else {
+    if (!isCodeOnGW(firstItem)){
+      console.log('fail to read response on gw code');
+    }
   }
   // else{
 
