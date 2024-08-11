@@ -279,6 +279,7 @@ function findGWCode(obj) {
 
   // send API request
   const mgmtCli = `run-script script-name "smart_dpi_find_gw_code" script "${SMART_DPI_FIND_GW_CODE}" targets.1 "${window.gatewayName}" --format json`;
+  console.log(mgmtCli)
   smxProxy.sendRequest("request-commit", {"commands" : [mgmtCli]}, "onContext");
 }
 
