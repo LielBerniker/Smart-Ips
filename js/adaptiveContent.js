@@ -1,5 +1,3 @@
-// import { ENABLED_STR,  DISABLED_STR } from './config.js';
-
 function formatDate(date) {
   const year = date.getFullYear().toString().slice(-2); // last two digits of year
   const month = (date.getMonth() + 1).toString().padStart(2, '0'); // month
@@ -187,5 +185,4 @@ function createTimeLine(currentGatewayInfo){
     document.getElementById('item-modal').style.display = 'none';
     document.getElementById('overlay').style.display = 'none';
   }
-
 }

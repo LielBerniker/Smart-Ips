@@ -1,5 +1,3 @@
-// import { MONITOR_STR, ACTION_STR, ENABLED_STR,  DISABLED_STR } from './config.js';
-
 function updateByConfiguration(currentGatewayInfo) {
   const stateToggle = document.getElementById('stateToggle');
   const stateStatus = document.querySelector('.state-status');
@@ -91,13 +89,3 @@ function updateLocalStorge(currentGatewayInfo, smartDpiInformationKey) {
   document.getElementById('critical-impact-protections').click();
   console.log("click on critical-impact-protections");
 }
-
-
-
-
-
-
-
-
-
-
