@@ -87,7 +87,8 @@ function isCodeOnGW(item) {
     if (jsonData.tasks && jsonData.tasks.length > 0) {
       responseMessage = jsonData.tasks[0]["task-details"][0].responseMessage;
       const decodedMessage = atob(responseMessage);
-      if (Number(decodedMessage) === FOUND_GW_COD) {
+      console.log(decodedMessage);
+      if (Number(decodedMessage) === FOUND_GW_CODE) {
         return true;
       }
     } else {
