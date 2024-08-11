@@ -534,6 +534,29 @@ function createTimeLine(){
 
 
 
+
+
+
+function handleStateToggleChange() {
+  const stateStatus = document.querySelector('.state-status');
+  const modeOptions = document.querySelectorAll('input[name="mode"]');
+  const monitorOption = document.querySelector('input[name="mode"][value="monitor"]');
+  const thresholdInput = document.getElementById('threshold');
+  
+  if (document.getElementById('stateToggle').checked) {
+      stateStatus.textContent = 'Enabled';
+      modeOptions.forEach(option => option.disabled = false);
+      monitorOption.checked = true;
+      thresholdInput.disabled = false; // Enable threshold input
+  } else {
+      stateStatus.textContent = 'Disabled';
+      modeOptions.forEach(option => option.disabled = true);
+      monitorOption.checked = true;
+      thresholdInput.disabled = true; // Disable threshold input
+  }
+}
+
+
 function handleSubmitClick(event) {
   event.preventDefault(); // Prevent form submission
   event.target.disabled = true; 
@@ -589,22 +612,6 @@ function initParameters() {
  
 
   updateByConfiguration()
-
-  document.getElementById('stateToggle').addEventListener('change', function() {
-      const stateStatus = document.querySelector('.state-status');
-      const modeOptions = document.querySelectorAll('input[name="mode"]');
-      const monitorOption = document.querySelector('input[name="mode"][value="monitor"]');
-      
-      if (this.checked) {
-          stateStatus.textContent = 'Enabled';
-          modeOptions.forEach(option => option.disabled = false);
-          monitorOption.checked = true;
-      } else {
-          stateStatus.textContent = 'Disabled';
-          modeOptions.forEach(option => option.disabled = true);
-          monitorOption.checked = true;
-      }
-  });
 
 }
 
