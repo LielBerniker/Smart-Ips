@@ -44,3 +44,9 @@ const DISABLED_STR = "Disabled";
 // Update Descriptions
 const MODE_UPDATE = "Mode update";
 const STATE_UPDATE = "State update";
+
+
+// found code on GW result
+const FOUND_GW_CODE = 1;
+
+

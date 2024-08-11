@@ -87,10 +87,9 @@ function isCodeOnGW(item) {
     if (jsonData.tasks && jsonData.tasks.length > 0) {
       responseMessage = jsonData.tasks[0]["task-details"][0].responseMessage;
       const decodedMessage = atob(responseMessage);
-      console.log(decodedMessage)
-      const parsedResponse = JSON.parse(decodedMessage);
-      console.log(parsedResponse)
-      return true;
+      if (Number(decodedMessage) === FOUND_GW_COD) {
+        return true;
+      }
     } else {
       alert('No tasks found in data.');
       console.log('No tasks found in data.');
@@ -243,59 +242,34 @@ function RunConfigReport() {
   smxProxy.sendRequest("request-commit", {"commands" : [mgmtCli]}, "onCommitReport");
 }
 
-function onContext(obj) {
-
-  window.gatewayName = obj.event.objects[0]["name"];
-  smartDpiInformationKey += "_" + window.gatewayName;
-  console.log(smartDpiInformationKey);
-  if (!localStorage.hasOwnProperty(smartDpiInformationKey))
-  {
-    RunConfigReport()
-  }else{
-    const currentTime = new Date();
-    const storedData = localStorage.getItem(smartDpiInformationKey);
-    const parsedData = JSON.parse(storedData);
-    const storedTime = new Date(parsedData.timestamp);
-    if (needNewGWreport(currentTime, storedTime)) {
-      RunConfigReport()
-    } else {
-      readFromLocalStorge(parsedData)
-    }
-  }
-}
 
 function onContext(value) {
 
-if (Array.isArray(value) && value.length > 0) {
-  var firstItem = value[0];
-  if (!isTaskSucceeded(firstItem)){
-    console.log('fail to get report of Smart IPS code in the GW');
-    alert('fail to get report of Smart IPS code in the GW');
-  } else {
-    if (!isCodeOnGW(firstItem)){
-      console.log('fail to read response on gw code');
+  if (Array.isArray(value) && value.length > 0) {
+    var firstItem = value[0];
+    if (!isTaskSucceeded(firstItem)){
+      console.log('fail to get report of Smart IPS code in the GW');
+      alert('fail to get report of Smart IPS code in the GW');
+    } else {
+      if (!isCodeOnGW(firstItem)){
+        console.log('Fail to read response on gw code or needed GW code not availble');
+      } else {
+        if (!localStorage.hasOwnProperty(smartDpiInformationKey)) {
+          RunConfigReport()
+        } else {
+          const currentTime = new Date();
+          const storedData = localStorage.getItem(smartDpiInformationKey);
+          const parsedData = JSON.parse(storedData);
+          const storedTime = new Date(parsedData.timestamp);
+          if (needNewGWreport(currentTime, storedTime)) {
+            RunConfigReport()
+          } else {
+            readFromLocalStorge(parsedData)
+          }
+        }
+      }
     }
   }
-  // else{
-
-  // }
-}
-
-
-  // if (!localStorage.hasOwnProperty(smartDpiInformationKey))
-  // {
-  //   RunConfigReport()
-  // }else{
-  //   const currentTime = new Date();
-  //   const storedData = localStorage.getItem(smartDpiInformationKey);
-  //   const parsedData = JSON.parse(storedData);
-  //   const storedTime = new Date(parsedData.timestamp);
-  //   if (needNewGWreport(currentTime, storedTime)) {
-  //     RunConfigReport()
-  //   } else {
-  //     readFromLocalStorge(parsedData)
-  //   }
-  // }
 }
 
 function findGWCode(obj) {
