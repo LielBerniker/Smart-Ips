@@ -256,20 +256,20 @@ if (Array.isArray(value) && value.length > 0) {
 }
 
 
-  if (!localStorage.hasOwnProperty(smartDpiInformationKey))
-  {
-    RunConfigReport()
-  }else{
-    const currentTime = new Date();
-    const storedData = localStorage.getItem(smartDpiInformationKey);
-    const parsedData = JSON.parse(storedData);
-    const storedTime = new Date(parsedData.timestamp);
-    if (needNewGWreport(currentTime, storedTime)) {
-      RunConfigReport()
-    } else {
-      readFromLocalStorge(parsedData)
-    }
-  }
+  // if (!localStorage.hasOwnProperty(smartDpiInformationKey))
+  // {
+  //   RunConfigReport()
+  // }else{
+  //   const currentTime = new Date();
+  //   const storedData = localStorage.getItem(smartDpiInformationKey);
+  //   const parsedData = JSON.parse(storedData);
+  //   const storedTime = new Date(parsedData.timestamp);
+  //   if (needNewGWreport(currentTime, storedTime)) {
+  //     RunConfigReport()
+  //   } else {
+  //     readFromLocalStorge(parsedData)
+  //   }
+  // }
 }
 
 function findGWCode(obj) {
