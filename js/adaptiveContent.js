@@ -19,33 +19,51 @@ function createItemsForTimeLine(history) {
   const timelineMap = new Map();
   prevDate = ""
   let protectionsSet = new Set();
-  history.forEach(logInfo => {
+  for (let i = history.length - 1; i >= 0; i--) {
+    const logInfo = window.currentGatewayInfo.history[i]
     const dateKey = convertDateFormat(logInfo.date);
     console.log("curent datekey");
     console.log(dateKey);
     console.log("prev datekey");
     console.log(prevDate);
 
-    if (dateKey !== prevDate){
-      console.log("new date");
-      let dataKeySet = new Set();
-      timelineMap.set(dateKey, dataKeySet);
+    if (prevDate === ""){
+      console.log("in first prev")
+      timelineMap.set(dateKey, new Set());
       prevDate = dateKey;
+    }
+    while (dateKey !== prevDate) {
+      dayAfterPrev = getNextDayFormated(prevDate)
+      console.log("the next day");
+      console.log(dayAfterPrev);
+      timelineMap.set(dayAfterPrev, new Set(protectionsSet));
+      prevDate = dayAfterPrev;
     }
 
     let currentData = timelineMap.get(dateKey);
 
-    if (logInfo.status === DISABLED_STR){
+    if (logInfo.status === disabledStr){
       if (!currentData.has(logInfo.name)){
         currentData.add(logInfo.name);
         protectionsSet.add(logInfo.name)
       } 
-    } else if (logInfo.status === ENABLED_STR) {
+    } else if (logInfo.status === enabledStr) {
       if (currentData.has(logInfo.name)){
         protectionsSet.delete(logInfo.name);
       } 
     }
-  });
+  }
+  if (protectionsSet.size > 0){
+    var currentDate = new Date();
+    var formatedDate = formatDate(currentDate);
+    while (formatedDate !== prevDate){
+      dayAfterPrev = getNextDayFormated(prevDate)
+      console.log("the next day");
+      console.log(dayAfterPrev);
+      timelineMap.set(dayAfterPrev, new Set(protectionsSet));
+      prevDate = dayAfterPrev;
+    }
+  }
 
   const items = [];
   let idCounter = 1; // Initialize a counter for unique IDs
@@ -109,7 +127,7 @@ function createTableContent(tableType, currentGatewayInfo){
     tableInformationList.forEach(row => {
         const tr = document.createElement('tr');
         tdClassStatus = "protection-table-td-status-"
-        if (row.status === modeUpdate || row.status === stateUpdate) {
+        if (row.status === MODE_UPDATE || row.status === STATE_UPDATE) {
           tdClassStatus += "Update";
         } else {
           tdClassStatus += row.status;
