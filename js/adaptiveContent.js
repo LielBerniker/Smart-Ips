@@ -1,4 +1,4 @@
-import { ENABLED_STR,  DISABLED_STR } from './config.js';
+// import { ENABLED_STR,  DISABLED_STR } from './config.js';
 
 function formatDate(date) {
   const year = date.getFullYear().toString().slice(-2); // last two digits of year
@@ -78,7 +78,7 @@ function createItemsForTimeLine(history) {
 }
 
 
-export function createTableContent(tableType, currentGatewayInfo){
+function createTableContent(tableType, currentGatewayInfo){
     const tableContainer = document.querySelector('.protection-table-wrapper');
     tableContainer.innerHTML = ''; // Clear existing table
 
@@ -125,7 +125,7 @@ export function createTableContent(tableType, currentGatewayInfo){
     tableContainer.appendChild(table);
 }
 
-export function createTimeLine(currentGatewayInfo){
+function createTimeLine(currentGatewayInfo){
   
   const protectionTableWrapper = document.querySelector('.protection-table-wrapper');
   console.log('in create timeline');

@@ -1,6 +1,6 @@
 // 1. Class Definitions
 
-export class ProtectionInformation {
+class ProtectionInformation {
     constructor(name, date, status) {
         this.name = name;
         this.date = date;
@@ -8,7 +8,7 @@ export class ProtectionInformation {
     }  
 }
 
-export class GatewayConfigInfo {
+class GatewayConfigInfo {
     constructor(isEnabled, mode, threshold) {
         this.isEnabled = isEnabled;
         this.mode = mode;
@@ -21,20 +21,20 @@ export class GatewayConfigInfo {
 // 2. Constant Definitions
 
 // Command paths for Smart DPI configuration
-export const SMART_DPI_CONFIG_UPDATE = "python3 $FWDIR/bin/smart_dpi_config_update.pyc";
-export const SMART_DPI_CONFIG_REPORT = "python3 $FWDIR/bin/smart_dpi_config_report.pyc";
+const SMART_DPI_CONFIG_UPDATE = "python3 $FWDIR/bin/smart_dpi_config_update.pyc";
+const SMART_DPI_CONFIG_REPORT = "python3 $FWDIR/bin/smart_dpi_config_report.pyc";
 
 // Mode Constants
-export const DISABLED_MODE = 1; // Send report to cloud only
-export const MONITOR_MODE = 2;  // Monitor + send log to smart console
-export const ACTION_MODE = 3;   // Completely enabled
+const DISABLED_MODE = 1; // Send report to cloud only
+const MONITOR_MODE = 2;  // Monitor + send log to smart console
+const ACTION_MODE = 3;   // Completely enabled
 
 // Status Strings
-export const MONITOR_STR = "Monitor";
-export const ACTION_STR = "Action";
-export const ENABLED_STR = "Enabled";
-export const DISABLED_STR = "Disabled";
+const MONITOR_STR = "Monitor";
+const ACTION_STR = "Action";
+const ENABLED_STR = "Enabled";
+const DISABLED_STR = "Disabled";
 
 // Update Descriptions
-export const MODE_UPDATE = "Mode update";
-export const STATE_UPDATE = "State update";
+const MODE_UPDATE = "Mode update";
+const STATE_UPDATE = "State update";

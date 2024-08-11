@@ -1,6 +1,6 @@
-import { updateByConfiguration, needNewGWreport, isTaskSucceeded, updateLocalStorge } from './verifications.js';
-import { createTableContent, createTimeLine } from './adaptiveContent.js';
-import { MONITOR_MODE, ACTION_MODE, MONITOR_STR, ACTION_STR, ENABLED_STR,  DISABLED_STR, ProtectionInformation, GatewayConfigInfo } from './config.js';
+// import { updateByConfiguration, needNewGWreport, isTaskSucceeded, updateLocalStorge } from './verifications.js';
+// import { createTableContent, createTimeLine } from './adaptiveContent.js';
+// import { MONITOR_MODE, ACTION_MODE, MONITOR_STR, ACTION_STR, ENABLED_STR,  DISABLED_STR, ProtectionInformation, GatewayConfigInfo } from './config.js';
 
 var smartDpiInformationKey = "smart_dpi_information";
 
@@ -262,3 +262,5 @@ function initializeApp() {
   // send API request
   smxProxy.sendRequest("get-context", null, "onContext");
 }
+
+

@@ -1,6 +1,6 @@
-import { MONITOR_STR, ACTION_STR, ENABLED_STR,  DISABLED_STR } from './config.js';
+// import { MONITOR_STR, ACTION_STR, ENABLED_STR,  DISABLED_STR } from './config.js';
 
-export function updateByConfiguration(currentGatewayInfo) {
+function updateByConfiguration(currentGatewayInfo) {
   const stateToggle = document.getElementById('stateToggle');
   const stateStatus = document.querySelector('.state-status');
   const modeOptions = document.querySelectorAll('input[name="mode"]');
@@ -37,7 +37,7 @@ export function updateByConfiguration(currentGatewayInfo) {
   }
 }
 
-export function needNewGWreport(currentTime, storedTime) {
+function needNewGWreport(currentTime, storedTime) {
   const timeDifference = (currentTime - storedTime) / (1000 * 60); // Convert milliseconds to minutes
   if (timeDifference > 20) {
     return true
@@ -45,7 +45,7 @@ export function needNewGWreport(currentTime, storedTime) {
   return false
 }
 
-export function isTaskSucceeded(item) {
+function isTaskSucceeded(item) {
   try {
     // temp1
     console.log(JSON.stringify(item, null, 2));
@@ -75,7 +75,7 @@ export function isTaskSucceeded(item) {
   return false;
 }
 
-export function updateLocalStorge(currentGatewayInfo, smartDpiInformationKey) {
+function updateLocalStorge(currentGatewayInfo, smartDpiInformationKey) {
   console.log(smartDpiInformationKey);
   const currentTime = new Date().toISOString();
   const SmartDpiObject = {
