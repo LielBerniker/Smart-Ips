@@ -258,7 +258,7 @@ function onContext(obj) {
 /*
  * Send API request 'get-context' (get-context return JSON object of extension location context).
  */
-function initializeApp() {
+export function initializeApp() {
   // send API request
   smxProxy.sendRequest("get-context", null, "onContext");
 }
