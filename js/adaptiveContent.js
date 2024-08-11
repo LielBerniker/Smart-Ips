@@ -1,3 +1,12 @@
+function getNextDayFormated(date) {
+  // Convert prevDate to a Date object
+  let prevDateObj = new Date(date);
+  // Add one day to the prevDate
+  prevDateObj.setDate(prevDateObj.getDate() + 1);
+  // Format the new date as 'YYYY-MM-DD'
+  return prevDateObj.toISOString().split('T')[0];
+}
+
 function formatDate(date) {
   const year = date.getFullYear().toString().slice(-2); // last two digits of year
   const month = (date.getMonth() + 1).toString().padStart(2, '0'); // month

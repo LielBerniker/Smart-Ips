@@ -20,9 +20,15 @@ class GatewayConfigInfo {
 
 // 2. Constant Definitions
 
+// scripts file path
+const SMART_DPI_CONFIG_UPDATE = "$FWDIR/bin/smart_dpi_config_update.pyc";
+const SMART_DPI_CONFIG_REPORT = "$FWDIR/bin/smart_dpi_config_report.pyc";
+
 // Command paths for Smart DPI configuration
-const SMART_DPI_CONFIG_UPDATE = "python3 $FWDIR/bin/smart_dpi_config_update.pyc";
-const SMART_DPI_CONFIG_REPORT = "python3 $FWDIR/bin/smart_dpi_config_report.pyc";
+const SMART_DPI_PYTHON_CONFIG_UPDATE = "python3 " + SMART_DPI_CONFIG_UPDATE;
+const SMART_DPI_PYTHON_CONFIG_REPORT = "python3 " + SMART_DPI_CONFIG_REPORT;
+
+const SMART_DPI_FIND_GW_CODE = 'f [ -f ' +  SMART_DPI_CONFIG_UPDATE + '] && [ -f ' + SMART_DPI_CONFIG_REPORT + ' ]; then echo "Both files exist"; else echo "One or both files do not exist"; fi';
 
 // Mode Constants
 const DISABLED_MODE = 1; // Send report to cloud only

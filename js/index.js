@@ -100,7 +100,7 @@ function onCommitUpdate(value) {
 
 function runUpdateConfigOnGW() {
   console.log(window.currentGatewayInfo);
-  const updateConfigCli = SMART_DPI_CONFIG_UPDATE + " " + window.currentGatewayInfo.isEnabled.toString() + " " + window.currentGatewayInfo.mode + " " + window.currentGatewayInfo.threshold.toString()
+  const updateConfigCli = SMART_DPI_PYTHON_CONFIG_UPDATE + " " + window.currentGatewayInfo.isEnabled.toString() + " " + window.currentGatewayInfo.mode + " " + window.currentGatewayInfo.threshold.toString()
   console.log(updateConfigCli);
   const mgmtCli = `run-script script-name "smart_dpi_config_update" script "${updateConfigCli}" targets.1 "${window.gatewayName}" --format json`;
   console.log(mgmtCli);
@@ -135,8 +135,6 @@ function readFromLocalStorge(parsedSmartDpiInformation) {
   console.log("click on critical-impact-protections");
 }
 
-
-
 function handleStateToggleChange() {
   const stateStatus = document.querySelector('.state-status');
   const modeOptions = document.querySelectorAll('input[name="mode"]');
@@ -155,7 +153,6 @@ function handleStateToggleChange() {
       thresholdInput.disabled = true; // Disable threshold input
   }
 }
-
 
 function handleSubmitClick(event) {
   event.preventDefault(); // Prevent form submission
@@ -177,8 +174,6 @@ function handleSubmitClick(event) {
   window.currentGatewayInfo.threshold = threshold;
   runUpdateConfigOnGW();
 }
-
-
 
 function handleHeaderClick(item) {
     if (item.classList.contains('active')) {
@@ -222,7 +217,7 @@ function onCommitReport(value) {
 
 function RunConfigReport() {
   // send API request
-  const mgmtCli = `run-script script-name "smart_dpi_config_report" script "${SMART_DPI_CONFIG_REPORT}" targets.1 "${window.gatewayName}" --format json`;
+  const mgmtCli = `run-script script-name "smart_dpi_config_report" script "${SMART_DPI_PYTHON_CONFIG_REPORT}" targets.1 "${window.gatewayName}" --format json`;
   smxProxy.sendRequest("request-commit", {"commands" : [mgmtCli]}, "onCommitReport");
 }
 
@@ -247,12 +242,52 @@ function onContext(obj) {
   }
 }
 
+function onContext(value) {
+
+if (Array.isArray(value) && value.length > 0) {
+  var firstItem = value[0];
+  if (!isTaskSucceeded(firstItem)){
+    console.log('fail to get report of Smart IPS code in the GW');
+    alert('fail to get report of Smart IPS code in the GW');
+  }
+  // else{
+
+  // }
+}
+
+
+  if (!localStorage.hasOwnProperty(smartDpiInformationKey))
+  {
+    RunConfigReport()
+  }else{
+    const currentTime = new Date();
+    const storedData = localStorage.getItem(smartDpiInformationKey);
+    const parsedData = JSON.parse(storedData);
+    const storedTime = new Date(parsedData.timestamp);
+    if (needNewGWreport(currentTime, storedTime)) {
+      RunConfigReport()
+    } else {
+      readFromLocalStorge(parsedData)
+    }
+  }
+}
+
+function findGWCode(obj) {
+  window.gatewayName = obj.event.objects[0]["name"];
+  smartDpiInformationKey += "_" + window.gatewayName;
+  console.log(smartDpiInformationKey);
+
+  // send API request
+  const mgmtCli = `run-script script-name "smart_dpi_find_gw_code" script "${SMART_DPI_FIND_GW_CODE}" targets.1 "${window.gatewayName}" --format json`;
+  smxProxy.sendRequest("request-commit", {"commands" : [mgmtCli]}, "onContext");
+}
+
 /*
  * Send API request 'get-context' (get-context return JSON object of extension location context).
  */
 function initializeApp() {
   // send API request
-  smxProxy.sendRequest("get-context", null, "onContext");
+  smxProxy.sendRequest("get-context", null, "finsGWCode");
 }
 
 
