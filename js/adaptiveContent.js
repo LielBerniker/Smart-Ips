@@ -42,12 +42,12 @@ function createItemsForTimeLine(history) {
 
     let currentData = timelineMap.get(dateKey);
 
-    if (logInfo.status === disabledStr){
+    if (logInfo.status === DISABLED_STR){
       if (!currentData.has(logInfo.name)){
         currentData.add(logInfo.name);
         protectionsSet.add(logInfo.name)
       } 
-    } else if (logInfo.status === enabledStr) {
+    } else if (logInfo.status === ENABLED_STR) {
       if (currentData.has(logInfo.name)){
         protectionsSet.delete(logInfo.name);
       } 
