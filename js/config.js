@@ -28,7 +28,7 @@ const SMART_DPI_CONFIG_REPORT = "$FWDIR/bin/smart_dpi_config_report.pyc";
 const SMART_DPI_PYTHON_CONFIG_UPDATE = "python3 " + SMART_DPI_CONFIG_UPDATE;
 const SMART_DPI_PYTHON_CONFIG_REPORT = "python3 " + SMART_DPI_CONFIG_REPORT;
 
-const SMART_DPI_FIND_GW_CODE = "if test -f '${SMART_DPI_CONFIG_UPDATE}' && test -f '${SMART_DPI_CONFIG_REPORT}'; then echo 1; else echo 0; fi;"
+const SMART_DPI_FIND_GW_CODE = "if test -f "  + SMART_DPI_CONFIG_UPDATE + " && test -f " + SMART_DPI_CONFIG_REPORT + "; then echo 1; else echo 0; fi;"
 
 // Mode Constants
 const DISABLED_MODE = 1; // Send report to cloud only
