@@ -171,7 +171,7 @@ function handleSubmitClick(event) {
       alert('Please insert a valid threshold percentage, between 1 to 100.');
       return;
   }
-  addLoader();
+
   const stateEnabled = document.getElementById('stateToggle').checked;
   const selectedMode = document.querySelector('input[name="mode"]:checked').value;
   const threshold = thresholdInput.value;
@@ -199,15 +199,11 @@ function handleHeaderClick(item) {
     // Add the active class to the clicked h1 element
     item.classList.add('active');
 
-    showLoading();
-
     if (item.textContent === 'Timeline') {
         createTimeLine(window.currentGatewayInfo);
     } else {
         createTableContent(item.textContent, window.currentGatewayInfo);
     }
-
-    hideLoading();
 }
 
 function onCommitReport(value) {
