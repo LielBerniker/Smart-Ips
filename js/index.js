@@ -287,7 +287,7 @@ function findGWCode(obj) {
  */
 function initializeApp() {
   // send API request
-  smxProxy.sendRequest("get-context", null, "finsGWCode");
+  smxProxy.sendRequest("get-context", null, "findGWCode");
 }
 
 
