@@ -133,7 +133,7 @@ function createTableContent(tableType, currentGatewayInfo){
     tbody.className = 'protection-table-tbody';
 
     tableInformationList = (tableType === 'Critical Impact Protections') ? currentGatewayInfo.protections : currentGatewayInfo.history;
-    console.log(tableInformationList.)
+    console.log(tableInformationList)
     tableInformationList.forEach(row => {
         const tr = document.createElement('tr');
         tdClassStatus = "protection-table-td-status-"
