@@ -307,6 +307,7 @@ function initializeElemets() {
  * Send API request 'get-context' (get-context return JSON object of extension location context).
  */
 function initializeApp() {
+  console.log("in initializeApp")
   initializeElemets()
   // send API request
   smxProxy.sendRequest("get-context", null, "receiveGWName");
