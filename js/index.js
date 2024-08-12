@@ -92,7 +92,7 @@ function onCommitUpdate(value) {
       console.log('fail to update Smart Dpi configuration');
     }
     else{
-      RunConfigReport()
+      runConfigReport()
       updateInfoLocalStorge(window.currentGatewayInfo, smartDpiInformationKey)
       runLocalFetchOnGW()
     }
