@@ -89,3 +89,25 @@ function updateLocalStorge(currentGatewayInfo, smartDpiInformationKey) {
   document.getElementById('critical-impact-protections').click();
   console.log("click on critical-impact-protections");
 }
+
+function isCodeOnGW(item) {
+  try {
+    const jsonString = item.substring(item.indexOf('{'), item.lastIndexOf('}') + 1);
+    const jsonData = JSON.parse(jsonString);
+    if (jsonData.tasks && jsonData.tasks.length > 0) {
+      responseMessage = jsonData.tasks[0]["task-details"][0].responseMessage;
+      const decodedMessage = atob(responseMessage);
+      console.log(decodedMessage);
+      if (Number(decodedMessage) === FOUND_GW_CODE) {
+        return true;
+      }
+    } else {
+      alert('No tasks found in data.');
+      console.log('No tasks found in data.');
+    }
+  } catch (error) {
+    alert("Error parsing JSON(getCongigurationData):" + error);
+    console.log("Error parsing JSON(getCongigurationData):" + error);
+  }
+  return false;
+}

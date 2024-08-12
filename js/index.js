@@ -80,28 +80,6 @@ function getConfigurationData(item) {
   return false;
 }
 
-function isCodeOnGW(item) {
-  try {
-    const jsonString = item.substring(item.indexOf('{'), item.lastIndexOf('}') + 1);
-    const jsonData = JSON.parse(jsonString);
-    if (jsonData.tasks && jsonData.tasks.length > 0) {
-      responseMessage = jsonData.tasks[0]["task-details"][0].responseMessage;
-      const decodedMessage = atob(responseMessage);
-      console.log(decodedMessage);
-      if (Number(decodedMessage) === FOUND_GW_CODE) {
-        return true;
-      }
-    } else {
-      alert('No tasks found in data.');
-      console.log('No tasks found in data.');
-    }
-  } catch (error) {
-    alert("Error parsing JSON(getCongigurationData):" + error);
-    console.log("Error parsing JSON(getCongigurationData):" + error);
-  }
-  return false;
-}
-
 function onCommitUpdate(value) {
   console.log(JSON.stringify(value, null, 2));
   
@@ -131,7 +109,7 @@ function runUpdateConfigOnGW() {
   smxProxy.sendRequest("request-commit", {"commands" : [mgmtCli]}, "onCommitUpdate");
 }
 
-function readFromLocalStorge(parsedSmartDpiInformation) {
+function readInfoFromLocalStorge(parsedSmartDpiInformation) {
   console.log(parsedSmartDpiInformation.isEnabled);
   console.log(parsedSmartDpiInformation.mode);
   console.log(parsedSmartDpiInformation.threshold);
@@ -265,7 +243,7 @@ function onContext(value) {
           if (needNewGWreport(currentTime, storedTime)) {
             RunConfigReport()
           } else {
-            readFromLocalStorge(parsedData)
+            readInfoFromLocalStorge(parsedData)
           }
         }
       }
