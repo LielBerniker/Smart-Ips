@@ -288,7 +288,6 @@ function receiveGWName(obj) {
 }
 
 function initializeElemets() {
-  document.addEventListener('DOMContentLoaded', (event) => {
     const protectionsHeader = document.getElementById('critical-impact-protections');
     protectionsHeader.removeEventListener('click', handleHeaderClick);  
     protectionsHeader.addEventListener('click', handleHeaderClick);    
@@ -300,7 +299,6 @@ function initializeElemets() {
     const timelineShowHeader = document.getElementById('timeline-show');
     timelineShowHeader.removeEventListener('click', handleHeaderClick);
     timelineShowHeader.addEventListener('click', handleHeaderClick);
-  });
 }
 
 /*
