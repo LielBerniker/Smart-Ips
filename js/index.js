@@ -174,26 +174,28 @@ function handleSubmitClick(event) {
   runUpdateConfigOnGW();
 }
 
-function handleHeaderClick(item) {
-    if (item.classList.contains('active')) {
-        return; // Do nothing if it's already active
-    }
+function handleHeaderClick(event) {
 
-    // Remove the active class from all h1 elements 
-    document.querySelectorAll('.header-container h1').forEach(h1 => {
-        h1.classList.remove('active');
-    });
+  const item = event.target; // Get the clicked element
+  if (item.classList.contains('active')) {
+      return; // Do nothing if it's already active
+  }
 
-    console.log(item.textContent);
+  // Remove the active class from all h1 elements 
+  document.querySelectorAll('.header-container h1').forEach(h1 => {
+      h1.classList.remove('active');
+  });
 
-    // Add the active class to the clicked h1 element
-    item.classList.add('active');
+  console.log(item.textContent);
 
-    if (item.textContent === 'Timeline') {
-        createTimeLine(window.currentGatewayInfo);
-    } else {
-        createTableContent(item.textContent, window.currentGatewayInfo);
-    }
+  // Add the active class to the clicked h1 element
+  item.classList.add('active');
+
+  if (item.textContent === 'Timeline') {
+      createTimeLine(window.currentGatewayInfo);
+  } else {
+      createTableContent(item.textContent, window.currentGatewayInfo);
+  }
 }
 
 function onCommitReport(value) {
@@ -288,6 +290,7 @@ function receiveGWName(obj) {
 }
 
 function initializeElemets() {
+  document.addEventListener('DOMContentLoaded', (event) => {
     const protectionsHeader = document.getElementById('critical-impact-protections');
     protectionsHeader.removeEventListener('click', handleHeaderClick);  
     protectionsHeader.addEventListener('click', handleHeaderClick);    
@@ -299,6 +302,7 @@ function initializeElemets() {
     const timelineShowHeader = document.getElementById('timeline-show');
     timelineShowHeader.removeEventListener('click', handleHeaderClick);
     timelineShowHeader.addEventListener('click', handleHeaderClick);
+  });
 }
 
 /*
