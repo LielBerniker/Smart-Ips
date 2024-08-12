@@ -1,4 +1,5 @@
 var smartDpiInformationKey = "smart_dpi_information";
+var smartDpiGWCodeKey = "smart_dpi_gw_code";
 
 window.gatewayName;
 window.currentGatewayInfo = new GatewayConfigInfo(0, MONITOR_STR, 60);
@@ -92,7 +93,7 @@ function onCommitUpdate(value) {
     }
     else{
       RunConfigReport()
-      updateLocalStorge(window.currentGatewayInfo, smartDpiInformationKey)
+      updateInfoLocalStorge(window.currentGatewayInfo, smartDpiInformationKey)
       runLocalFetchOnGW()
     }
   }
@@ -155,8 +156,6 @@ function handleStateToggleChange() {
 }
 
 function handleSubmitClick(event) {
-  event.preventDefault(); // Prevent form submission
-  event.target.disabled = true; 
   const thresholdInput = document.getElementById('threshold');
   const thresholdValue = parseInt(thresholdInput.value, 10);
 
@@ -209,21 +208,35 @@ function onCommitReport(value) {
       }
       else{
         document.getElementById('critical-impact-protections').click();
-        updateLocalStorge(window.currentGatewayInfo, smartDpiInformationKey)
+        updateInfoLocalStorge(window.currentGatewayInfo, smartDpiInformationKey)
       }
     }
   }
 }
 
-function RunConfigReport() {
+function runConfigReport() {
   // send API request
   const mgmtCli = `run-script script-name "smart_dpi_config_report" script "${SMART_DPI_PYTHON_CONFIG_REPORT}" targets.1 "${window.gatewayName}" --format json`;
   smxProxy.sendRequest("request-commit", {"commands" : [mgmtCli]}, "onCommitReport");
 }
 
 
-function onContext(value) {
+function handleGWInformation() {
+  if (!localStorage.hasOwnProperty(smartDpiInformationKey)) {
+    runConfigReport()
+  } else {
+    const storedData = localStorage.getItem(smartDpiInformationKey);
+    const parsedData = JSON.parse(storedData);
+    const storedTime = new Date(parsedData.timestamp);
+    if (isTimePass(storedTime, GET_NEW_REPORT_TIME)) {
+      runConfigReport()
+    } else {
+      readInfoFromLocalStorge(parsedData)
+    }
+  }
+}
 
+function handleGWCodeResult(value) {
   if (Array.isArray(value) && value.length > 0) {
     var firstItem = value[0];
     if (!isTaskSucceeded(firstItem)){
@@ -232,34 +245,41 @@ function onContext(value) {
     } else {
       if (!isCodeOnGW(firstItem)){
         console.log('Fail to read response on gw code or needed GW code not availble');
+        updateGWCodeLocalStorge(NOT_FOUND_GW_CODE, smartDpiGWCodeKey)
       } else {
-        if (!localStorage.hasOwnProperty(smartDpiInformationKey)) {
-          RunConfigReport()
-        } else {
-          const currentTime = new Date();
-          const storedData = localStorage.getItem(smartDpiInformationKey);
-          const parsedData = JSON.parse(storedData);
-          const storedTime = new Date(parsedData.timestamp);
-          if (needNewGWreport(currentTime, storedTime)) {
-            RunConfigReport()
-          } else {
-            readInfoFromLocalStorge(parsedData)
-          }
-        }
+        updateGWCodeLocalStorge(FOUND_GW_CODE, smartDpiGWCodeKey)
+        handleGWInformation()
       }
     }
   }
 }
 
-function findGWCode(obj) {
-  window.gatewayName = obj.event.objects[0]["name"];
-  smartDpiInformationKey += "_" + window.gatewayName;
-  console.log(smartDpiInformationKey);
-
+function receiveGWCode() {
   // send API request
   const mgmtCli = `run-script script-name "smart_dpi_find_gw_code" script "${SMART_DPI_FIND_GW_CODE}" targets.1 "${window.gatewayName}" --format json`;
   console.log(mgmtCli)
-  smxProxy.sendRequest("request-commit", {"commands" : [mgmtCli]}, "onContext");
+  smxProxy.sendRequest("request-commit", {"commands" : [mgmtCli]}, "handleGWCodeResult");
+}
+
+function receiveGWName(obj) {
+  window.gatewayName = obj.event.objects[0]["name"];
+  smartDpiInformationKey += "_" + window.gatewayName;
+  smartDpiGWCodeKey += "_" + window.gatewayName;
+  console.log(smartDpiInformationKey);
+  if (!localStorage.hasOwnProperty(smartDpiGWCodeKey)) {
+    receiveGWCode()
+  } else {
+    const storedData = localStorage.getItem(smartDpiGWCodeKey);
+    const parsedData = JSON.parse(storedData);
+    const storedTime = new Date(parsedData.timestamp);
+    if (isTimePass(storedTime, GET_NEW_GW_CODE_TIME)) {
+      receiveGWCode()
+    } else {
+      if (Number(parsedData.isCodeOnGW) === 1) {
+        handleGWInformation()
+      }
+    }
+  }
 }
 
 /*
@@ -267,7 +287,7 @@ function findGWCode(obj) {
  */
 function initializeApp() {
   // send API request
-  smxProxy.sendRequest("get-context", null, "findGWCode");
+  smxProxy.sendRequest("get-context", null, "receiveGWName");
 }
 
 

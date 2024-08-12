@@ -48,5 +48,10 @@ const STATE_UPDATE = "State update";
 
 // found code on GW result
 const FOUND_GW_CODE = 1;
+const NOT_FOUND_GW_CODE = 0;
+
+// time in minutes
+const GET_NEW_REPORT_TIME = 20;
+const GET_NEW_GW_CODE_TIME = 720;
 
 

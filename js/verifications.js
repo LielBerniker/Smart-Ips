@@ -35,9 +35,10 @@ function updateByConfiguration(currentGatewayInfo) {
   }
 }
 
-function needNewGWreport(currentTime, storedTime) {
+function isTimePass(storedTime, timeInMinutes) {
+  const currentTime = new Date();
   const timeDifference = (currentTime - storedTime) / (1000 * 60); // Convert milliseconds to minutes
-  if (timeDifference > 20) {
+  if (timeDifference > timeInMinutes) {
     return true
   }
   return false
@@ -73,7 +74,7 @@ function isTaskSucceeded(item) {
   return false;
 }
 
-function updateLocalStorge(currentGatewayInfo, smartDpiInformationKey) {
+function updateInfoLocalStorge(currentGatewayInfo, smartDpiInformationKey) {
   console.log(smartDpiInformationKey);
   const currentTime = new Date().toISOString();
   const SmartDpiObject = {
@@ -85,10 +86,22 @@ function updateLocalStorge(currentGatewayInfo, smartDpiInformationKey) {
     timestamp: currentTime
   };
   localStorage.setItem(smartDpiInformationKey, JSON.stringify(SmartDpiObject));
-  console.log("Finish to update local storage");
+  console.log("Finish to update info local storage");
   document.getElementById('critical-impact-protections').click();
   console.log("click on critical-impact-protections");
 }
+
+function updateGWCodeLocalStorge(gwCodeState, smartDpiGWCodeKey) {
+  console.log(smartDpiGWCodeKey);
+  const currentTime = new Date().toISOString();
+  const SmartDpiGWCodeObject = {
+    isCodeOnGW: gwCodeState,
+    timestamp: currentTime
+  };
+  localStorage.setItem(smartDpiGWCodeKey, JSON.stringify(SmartDpiGWCodeObject));
+  console.log("Finish to update gw code local storage");
+}
+
 
 function isCodeOnGW(item) {
   try {
