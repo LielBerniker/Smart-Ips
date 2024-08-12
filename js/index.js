@@ -287,10 +287,27 @@ function receiveGWName(obj) {
   }
 }
 
+function initializeElemets() {
+  document.addEventListener('DOMContentLoaded', (event) => {
+    const protectionsHeader = document.getElementById('critical-impact-protections');
+    protectionsHeader.removeEventListener('click', handleHeaderClick);  
+    protectionsHeader.addEventListener('click', handleHeaderClick);    
+  
+    const logHistoryHeader = document.getElementById('log-history');
+    logHistoryHeader.removeEventListener('click', handleHeaderClick);
+    logHistoryHeader.addEventListener('click', handleHeaderClick);
+  
+    const timelineShowHeader = document.getElementById('timeline-show');
+    timelineShowHeader.removeEventListener('click', handleHeaderClick);
+    timelineShowHeader.addEventListener('click', handleHeaderClick);
+  });
+}
+
 /*
  * Send API request 'get-context' (get-context return JSON object of extension location context).
  */
 function initializeApp() {
+  initializeElemets()
   // send API request
   smxProxy.sendRequest("get-context", null, "receiveGWName");
 }
