@@ -222,6 +222,7 @@ function runConfigReport() {
 
 
 function handleGWInformation() {
+  console.log("handle information")
   if (!localStorage.hasOwnProperty(smartDpiInformationKey)) {
     runConfigReport()
   } else {
@@ -266,9 +267,12 @@ function receiveGWName(obj) {
   smartDpiInformationKey += "_" + window.gatewayName;
   smartDpiGWCodeKey += "_" + window.gatewayName;
   console.log(smartDpiInformationKey);
+  console.log(smartDpiGWCodeKey);
   if (!localStorage.hasOwnProperty(smartDpiGWCodeKey)) {
     receiveGWCode()
+    console.log("smartDpiGWCodeKey not in local storge")
   } else {
+    console.log("smartDpiGWCodeKey is in local storge")
     const storedData = localStorage.getItem(smartDpiGWCodeKey);
     const parsedData = JSON.parse(storedData);
     const storedTime = new Date(parsedData.timestamp);
@@ -276,6 +280,7 @@ function receiveGWName(obj) {
       receiveGWCode()
     } else {
       if (Number(parsedData.isCodeOnGW) === 1) {
+        console.log("gw got the needed code for the extension")
         handleGWInformation()
       }
     }
