@@ -244,7 +244,7 @@ function handleGWCodeResult(value) {
       alert('fail to get report of Smart IPS code in the GW');
     } else {
       if (!isCodeOnGW(firstItem)){
-        console.log('Fail to read response on gw code or needed GW code not availble');
+        console.log('Fail to read response of gw code, or the needed GW code not availble');
         updateGWCodeLocalStorge(NOT_FOUND_GW_CODE, smartDpiGWCodeKey)
       } else {
         updateGWCodeLocalStorge(FOUND_GW_CODE, smartDpiGWCodeKey)
